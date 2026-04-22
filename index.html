@@ -1,235 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sai Bhargav — Game Designer</title>
-<meta name="description" content="Sai Bhargav — Game Designer. MA Game Design graduate with industry experience. Unity, Unreal Engine, Level Design.">
-
-<!-- Fonts -->
+<meta name="description" content="Sai Bhargav — Game Designer. MA Game Design. Unity · Unreal · Level Design.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/shared.css">
 <style>
-/* ════════════════════════════════════════════════════════════════
-   SAI BHARGAV — PORTFOLIO  ·  index.html
-   Exact replica of https://saibhargav7599.github.io/Temporrfolio/
-   ════════════════════════════════════════════════════════════════ */
-
-/* ── TOKENS ── */
-:root{
-  --c:#00f5ff;     /* neon cyan  */
-  --c2:#ff006e;    /* neon pink  */
-  --c3:#7b2fff;    /* purple     */
-  --gold:#ffd700;
-  --bg:#020408;
-  --bg2:#060d14;
-  --mid:#0a1628;
-  --txt:#c8d8e8;
-  --dim:#4a6a8a;
-  --dim2:#2a4a6a;
-  --card:rgba(6,20,40,.88);
-  --bdr:rgba(0,245,255,.12);
-  --bdr2:rgba(0,245,255,.26);
-  --glow:0 0 30px rgba(0,245,255,.22);
-  --glow2:0 0 40px rgba(255,0,110,.3);
-}
-
-/* ── RESET ── */
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;font-size:16px}
-body{background:var(--bg);color:var(--txt);font-family:'Rajdhani',sans-serif;overflow-x:hidden;cursor:none;line-height:1.6}
-body.locked{overflow:hidden}
-a{text-decoration:none;color:inherit}
-button{font-family:inherit}
-img{display:block;max-width:100%}
-
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--c);border-radius:2px}
-
-/* ── CURSOR ── */
-#cur,#cur-ring{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);border-radius:50%}
-#cur{width:10px;height:10px;background:var(--c);transition:width .2s,height .2s,background .2s;mix-blend-mode:screen}
-#cur-ring{width:38px;height:38px;border:1px solid rgba(0,245,255,.35);transition:width .3s,height .3s,border-color .3s}
-#cur.on{width:18px;height:18px;background:var(--c2)}
-#cur-ring.on{width:56px;height:56px;border-color:rgba(255,0,110,.4)}
-
-/* ── CANVAS BG ── */
-#bgc{position:fixed;inset:0;z-index:0;pointer-events:none}
-
-/* ── SCANLINES ── */
-body::after{content:'';position:fixed;inset:0;z-index:800;pointer-events:none;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.04) 2px,rgba(0,0,0,.04) 4px)}
-
-/* ── PAGE TRANSITION ── */
-#pt{position:fixed;inset:0;z-index:8000;background:var(--bg);
-  clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
-  transform:scaleY(1);transform-origin:top;pointer-events:none;
-  transition:transform .55s cubic-bezier(.76,0,.24,1)}
-#pt.gone{transform:scaleY(0)}
-
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:500;height:68px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 56px;background:rgba(2,4,8,.94);
-  backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr)}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;
-  color:var(--c);text-shadow:0 0 18px rgba(0,245,255,.5)}
-.nav-links{display:flex;gap:6px;list-style:none}
-.nav-links a{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:1.5px;
-  text-transform:uppercase;color:var(--dim);padding:6px 11px;
-  border:1px solid transparent;transition:all .3s;white-space:nowrap}
-.nav-links a:hover,.nav-links a.act{color:var(--c);border-color:var(--bdr2);background:rgba(0,245,255,.05)}
-.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
-.ham span{display:block;width:22px;height:1.5px;background:var(--c);transition:all .3s}
-
-/* mobile nav */
-#mobnav{display:none;position:fixed;inset:0;z-index:600;background:rgba(2,4,8,.98);
-  flex-direction:column;align-items:center;justify-content:center;gap:18px}
-#mobnav.open{display:flex}
-#mobnav a{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:4px;color:var(--txt);transition:color .3s}
-#mobnav a:hover{color:var(--c)}
-
-/* ── SECTION HELPERS ── */
-.s{position:relative;z-index:1}
-.wrap{max-width:1380px;margin:0 auto;padding:100px 56px;position:relative;z-index:1}
-.wrap-sm{max-width:1380px;margin:0 auto;padding:60px 56px;position:relative;z-index:1}
-.divider{max-width:1380px;margin:0 auto;height:1px;position:relative;z-index:1;
-  background:linear-gradient(to right,transparent,var(--bdr2),transparent)}
-.sec-label{font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:4px;
-  color:var(--c);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.sec-label::before{content:'';width:28px;height:1px;background:var(--c)}
-.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.6rem,5vw,5rem);
-  line-height:1;letter-spacing:2px}
-
-/* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 34px;
-  font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:2px;
-  text-transform:uppercase;font-weight:700;cursor:pointer;border:none;
-  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all .3s}
-.btn-p{background:var(--c);color:var(--bg)}
-.btn-p:hover{background:var(--c2);transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,0,110,.35)}
-.btn-g{background:transparent;color:var(--c);border:1px solid var(--c);clip-path:none}
-.btn-g:hover{background:rgba(0,245,255,.08);transform:translateY(-2px);box-shadow:var(--glow)}
-.btn-sm{padding:9px 22px;font-size:.6rem}
-
-/* ── REVEAL ── */
-.rev{opacity:0;transform:translateY(38px);transition:opacity .8s,transform .8s}
-.rev.vis{opacity:1;transform:translateY(0)}
-.rev-l{opacity:0;transform:translateX(-38px);transition:opacity .8s,transform .8s}
-.rev-l.vis{opacity:1;transform:translateX(0)}
-.rev-r{opacity:0;transform:translateX(38px);transition:opacity .8s,transform .8s}
-.rev-r.vis{opacity:1;transform:translateX(0)}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
-.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
-
-/* ════════════════════════════════════════
-   §1 HERO
-   ════════════════════════════════════════ */
-#home{min-height:100vh;display:flex;align-items:center;justify-content:center;
-  padding:140px 56px 80px;overflow:hidden;position:relative;z-index:1}
+/* ── HOME-SPECIFIC ── */
+#home{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:140px 52px 80px;overflow:hidden;position:relative;z-index:1}
 .hero-inner{text-align:center;position:relative;max-width:900px}
-
-.hero-tag{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:4px;
-  color:var(--c);text-transform:uppercase;margin-bottom:22px;display:block;
-  opacity:0;animation:fu .8s .2s forwards}
-.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,15vw,14rem);
-  line-height:.84;letter-spacing:-2px;position:relative;
-  background:linear-gradient(135deg,#fff 0%,var(--c) 48%,var(--c3) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  filter:drop-shadow(0 0 46px rgba(0,245,255,.28));
-  opacity:0;animation:fu .8s .4s forwards}
-.hero-name::before,.hero-name::after{content:attr(data-t);position:absolute;
-  inset:0;background:inherit;-webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent}
+.hero-tag{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:4px;color:var(--c);text-transform:uppercase;margin-bottom:22px;display:block;opacity:0;animation:fu .8s .2s forwards}
+.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,15vw,14rem);line-height:.84;letter-spacing:-2px;position:relative;background:linear-gradient(135deg,#fff 0%,var(--c) 48%,var(--c3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 46px rgba(0,245,255,.28));opacity:0;animation:fu .8s .4s forwards}
+.hero-name::before,.hero-name::after{content:attr(data-t);position:absolute;inset:0;background:inherit;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .hero-name::before{animation:g1 5s infinite;clip-path:polygon(0 0,100% 0,100% 33%,0 33%)}
 .hero-name::after{animation:g2 5s infinite;clip-path:polygon(0 66%,100% 66%,100% 100%,0 100%)}
-.hero-sub-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,4vw,3.4rem);
-  letter-spacing:12px;color:var(--dim);margin-top:12px;
-  opacity:0;animation:fu .8s .6s forwards}
-.hero-desc{margin:26px auto 0;font-size:1.05rem;color:var(--dim);max-width:500px;
-  line-height:1.9;opacity:0;animation:fu .8s .8s forwards}
-.hero-ctas{margin-top:46px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;
-  opacity:0;animation:fu .8s 1s forwards}
-.hero-socials{position:absolute;left:-126px;top:50%;
-  transform:translateY(-50%) rotate(-90deg);
-  display:flex;gap:28px;opacity:0;animation:fi 1s 1.3s forwards}
-.hero-socials a{font-family:'Space Mono',monospace;font-size:.58rem;
-  letter-spacing:2px;color:var(--dim);text-transform:uppercase;transition:color .3s}
-.hero-socials a:hover{color:var(--c)}
-.scroll-hint{position:absolute;bottom:-84px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:10px;
-  opacity:0;animation:fi 1s 1.6s forwards}
-.scroll-hint span{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:2px;color:var(--dim)}
-.scroll-line{width:1px;height:56px;background:linear-gradient(to bottom,var(--c),transparent);
-  animation:sp 2s infinite}
+.hero-sub-t{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,4vw,3.2rem);letter-spacing:12px;color:var(--dim);margin-top:12px;opacity:0;animation:fu .8s .6s forwards}
+.hero-desc{margin:24px auto 0;font-size:1.02rem;color:var(--dim);max-width:500px;line-height:1.9;opacity:0;animation:fu .8s .8s forwards}
+.hero-ctas{margin-top:44px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fu .8s 1s forwards}
+.hero-soc{position:absolute;left:-126px;top:50%;transform:translateY(-50%) rotate(-90deg);display:flex;gap:28px;opacity:0;animation:fi 1s 1.3s forwards}
+.hero-soc a{font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:2px;color:var(--dim);text-transform:uppercase;transition:color .3s}
+.hero-soc a:hover{color:var(--c)}
+.scroll-hint{position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:9px;opacity:0;animation:fi 1s 1.6s forwards}
+.scroll-hint span{font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:2px;color:var(--dim)}
+.scroll-line{width:1px;height:54px;background:linear-gradient(to bottom,var(--c),transparent);animation:sp 2s infinite}
 
-/* ════════════════════════════════════════
-   §2 ABOUT
-   ════════════════════════════════════════ */
-#about .inner{display:grid;grid-template-columns:1fr 1.05fr;gap:76px;align-items:start}
-.about-text p{font-size:1.02rem;color:var(--dim);line-height:1.9;margin-bottom:14px}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
-.tag{padding:5px 14px;border:1px solid var(--bdr);font-family:'Space Mono',monospace;
-  font-size:.6rem;color:var(--dim);letter-spacing:1px;
-  clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);transition:all .3s}
+/* ABOUT */
+#about .inner{display:grid;grid-template-columns:1fr 1.08fr;gap:72px;align-items:start}
+.about-text p{font-size:1.02rem;color:var(--dim);line-height:1.9;margin-bottom:13px}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.tag{padding:5px 13px;border:1px solid var(--bdr);font-family:'Space Mono',monospace;font-size:.58rem;color:var(--dim);letter-spacing:1px;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);transition:all .3s}
 .tag:hover{border-color:var(--c);color:var(--c);background:rgba(0,245,255,.05)}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px}
-.stat{border:1px solid var(--bdr);padding:20px;background:var(--card);
-  clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
-  transition:border-color .3s,transform .3s}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.stat{border:1px solid var(--bdr);padding:18px;background:var(--card);clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:border-color .3s,transform .3s}
 .stat:hover{border-color:var(--c);transform:translateY(-4px)}
-.stat-n{font-family:'Bebas Neue',sans-serif;font-size:2.7rem;color:var(--c);line-height:1}
-.stat-l{font-size:.78rem;color:var(--dim);letter-spacing:1px;margin-top:4px}
-
+.stat-n{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;color:var(--c);line-height:1}
+.stat-l{font-size:.76rem;color:var(--dim);letter-spacing:1px;margin-top:3px}
 /* exp card */
-.exp-card{perspective:900px}
-.exp-card-inner{padding:42px 34px;background:var(--card);border:1px solid var(--bdr);
-  transform-style:preserve-3d;transition:transform .12s;position:relative}
-.exp-card-inner::before{content:'';position:absolute;inset:-1px;z-index:-1;
-  background:linear-gradient(135deg,var(--c),transparent 44%,var(--c3));opacity:.2}
-.exp-item{margin-bottom:26px;padding-bottom:26px;border-bottom:1px solid var(--bdr)}
+.exp-card{perspective:900px}.exp-card-inner{padding:40px 32px;background:var(--card);border:1px solid var(--bdr);transform-style:preserve-3d;transition:transform .12s;position:relative}
+.exp-card-inner::before{content:'';position:absolute;inset:-1px;z-index:-1;background:linear-gradient(135deg,var(--c),transparent 44%,var(--c3));opacity:.2}
+.exp-item{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--bdr)}
 .exp-item:last-child{border:none;margin:0;padding:0}
-.exp-role{font-family:'Bebas Neue',sans-serif;font-size:1.32rem;letter-spacing:2px;color:#fff}
-.exp-co{font-family:'Space Mono',monospace;font-size:.66rem;color:var(--c);margin-top:4px}
-.exp-per{font-size:.84rem;color:var(--dim);margin-top:4px}
+.exp-role{font-family:'Bebas Neue',sans-serif;font-size:1.28rem;letter-spacing:2px;color:#fff}
+.exp-co{font-family:'Space Mono',monospace;font-size:.64rem;color:var(--c);margin-top:3px}
+.exp-per{font-size:.82rem;color:var(--dim);margin-top:3px}
 
-/* ════════════════════════════════════════
-   §3 PORTFOLIO GRID
-   ════════════════════════════════════════ */
-#portfolio .header{text-align:center;margin-bottom:66px}
+/* PORTFOLIO */
+#portfolio .ph{text-align:center;margin-bottom:60px}
 .games{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
-.gc{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--bdr);
-  cursor:pointer;transform-style:preserve-3d;
-  transition:border-color .4s,transform .4s,box-shadow .4s}
+.gc{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--bdr);cursor:pointer;transform-style:preserve-3d;transition:border-color .4s,transform .4s,box-shadow .4s}
 .gc:hover{border-color:var(--c);transform:translateY(-7px) scale(1.01);box-shadow:var(--glow)}
-.gc.span2{grid-column:span 2}
+.gc.s2{grid-column:span 2}
 .gt{width:100%;padding-top:52%;position:relative;overflow:hidden}
 .gt-bg{position:absolute;inset:0;transition:transform .6s}
 .gc:hover .gt-bg{transform:scale(1.07)}
 .gt-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(2,4,8,.97) 0%,rgba(2,4,8,.28) 58%,transparent 100%)}
-.gt-num{position:absolute;top:14px;left:14px;font-family:'Bebas Neue',sans-serif;
-  font-size:5rem;color:rgba(255,255,255,.04);line-height:1;z-index:1}
-.gt-badge{position:absolute;top:14px;right:14px;padding:4px 11px;
-  background:rgba(0,245,255,.08);border:1px solid var(--c);
-  font-family:'Space Mono',monospace;font-size:.56rem;color:var(--c);letter-spacing:1px;z-index:2}
-.gi{padding:26px}
-.gi-genre{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--c2);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px}
-.gi-name{font-family:'Bebas Neue',sans-serif;font-size:1.85rem;letter-spacing:2px;color:#fff;line-height:1.1;margin-bottom:11px}
-.gi-desc{font-size:.88rem;color:var(--dim);line-height:1.7;margin-bottom:18px;
-  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.gi-meta{display:flex;gap:18px;align-items:center}
-.gm-i{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--dim);letter-spacing:1px}
-.gm-i span{color:var(--c);display:block;font-size:.7rem;margin-bottom:2px}
-.garrow{margin-left:auto;width:38px;height:38px;border:1px solid var(--bdr);
-  display:flex;align-items:center;justify-content:center;
-  clip-path:polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%);
-  transition:all .3s;color:var(--dim);font-size:1rem}
-.gc:hover .garrow{background:var(--c);color:var(--bg);border-color:var(--c)}
-
+.gt-n{position:absolute;top:14px;left:14px;font-family:'Bebas Neue',sans-serif;font-size:5rem;color:rgba(255,255,255,.04);line-height:1;z-index:1}
+.gt-b{position:absolute;top:14px;right:14px;padding:4px 11px;background:rgba(0,245,255,.08);border:1px solid var(--c);font-family:'Space Mono',monospace;font-size:.56rem;color:var(--c);letter-spacing:1px;z-index:2}
+.gi{padding:24px}
+.gi-genre{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--c2);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.gi-name{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:2px;color:#fff;line-height:1.1;margin-bottom:10px}
+.gi-desc{font-size:.87rem;color:var(--dim);line-height:1.7;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.gi-meta{display:flex;gap:16px;align-items:center}
+.gmi{font-family:'Space Mono',monospace;font-size:.56rem;color:var(--dim);letter-spacing:1px}
+.gmi span{color:var(--c);display:block;font-size:.68rem;margin-bottom:2px}
+.garr{margin-left:auto;width:36px;height:36px;border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;clip-path:polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%);transition:all .3s;color:var(--dim);font-size:.95rem}
+.gc:hover .garr{background:var(--c);color:var(--bg);border-color:var(--c)}
 /* thumb gradients */
 .th-hotel{background:linear-gradient(135deg,#140228,#3a1060,#0b2240)}
 .th-evil{background:linear-gradient(135deg,#081508,#183a18,#091e00)}
@@ -237,288 +75,189 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;height:68px;
 .th-dystopian{background:linear-gradient(135deg,#080818,#001838,#18001e)}
 .th-hollyhill{background:linear-gradient(135deg,#001810,#0c3a1e,#001008)}
 .th-persona{background:linear-gradient(135deg,#180606,#3a0c0c,#08001a)}
-.th-deco{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.1}
-.th-deco svg{width:52%;height:52%}
+.tdeco{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.1}
+.tdeco svg{width:52%;height:52%}
 
-/* ── MODAL ── */
-.modal-ov{position:fixed;inset:0;z-index:700;background:rgba(2,4,8,.96);
-  backdrop-filter:blur(22px);display:flex;align-items:center;justify-content:center;
-  padding:36px;opacity:0;pointer-events:none;transition:opacity .4s}
-.modal-ov.open{opacity:1;pointer-events:all}
-.modal-box{max-width:860px;width:100%;max-height:90vh;overflow-y:auto;
-  background:var(--bg2);border:1px solid var(--bdr);
-  transform:translateY(26px);transition:transform .4s;
-  scrollbar-width:thin;scrollbar-color:var(--c) transparent}
-.modal-ov.open .modal-box{transform:translateY(0)}
-.modal-hero{width:100%;padding-top:44%;position:relative;overflow:hidden}
-.modal-hero-ov{position:absolute;inset:0;background:linear-gradient(to top,var(--bg2) 0%,transparent 60%)}
-.modal-x{position:absolute;top:14px;right:14px;z-index:10;width:42px;height:42px;
-  background:rgba(2,4,8,.8);border:1px solid var(--bdr);color:var(--txt);
-  font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s}
-.modal-x:hover{border-color:var(--c2);color:var(--c2)}
-.modal-body{padding:34px}
-.modal-tag{display:inline-block;padding:4px 13px;border:1px solid var(--c2);
-  font-family:'Space Mono',monospace;font-size:.58rem;color:var(--c2);letter-spacing:2px;margin-bottom:13px}
-.modal-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.5rem);
-  letter-spacing:3px;line-height:.95;margin-bottom:8px}
-.modal-role{font-family:'Space Mono',monospace;font-size:.66rem;color:var(--c);letter-spacing:2px;margin-bottom:26px}
-.modal-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:26px}
-.mspec{padding:13px;background:rgba(0,245,255,.03);border:1px solid var(--bdr);text-align:center}
-.mspec-k{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
-.mspec-v{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--c);letter-spacing:2px}
-.modal-desc{font-size:.98rem;line-height:1.9;color:var(--dim);margin-bottom:26px}
-.modal-mh{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:#fff;
-  margin-bottom:13px;display:flex;align-items:center;gap:13px}
-.modal-mh::after{content:'';flex:1;height:1px;background:var(--bdr)}
-.mech-list{display:flex;flex-direction:column;gap:12px;margin-bottom:26px}
-.mech{display:flex;gap:12px;padding:13px;background:rgba(0,245,255,.03);border-left:2px solid var(--c)}
-.mech-i{font-size:1.3rem;flex-shrink:0}
-.mech-n{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:#fff;margin-bottom:3px}
-.mech-d{font-size:.83rem;color:var(--dim);line-height:1.6}
-.modal-links{display:flex;gap:12px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--bdr)}
+/* VIDEO THUMBNAIL OVERLAY for project cards */
+.gt-yt{position:absolute;bottom:14px;left:14px;z-index:3;display:flex;gap:8px}
+.yt-pill{padding:4px 12px;background:rgba(255,0,0,.7);font-family:'Space Mono',monospace;font-size:.54rem;color:#fff;letter-spacing:1px;border-radius:2px;text-decoration:none;transition:background .3s}
+.yt-pill:hover{background:rgba(255,0,0,1)}
 
-/* ════════════════════════════════════════
-   §4 CINEMATICS
-   ════════════════════════════════════════ */
-#cinematics .cine-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:56px}
-.v-card{border:1px solid var(--bdr);background:var(--card);overflow:hidden;
-  transition:border-color .3s,transform .3s}
-.v-card:hover{border-color:var(--c);transform:translateY(-4px);box-shadow:var(--glow)}
-.v-card.big{grid-column:span 2}
-.v-thumb{width:100%;padding-top:56.25%;position:relative;overflow:hidden}
-.v-thumb iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
-.v-thumb-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.v-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:64px;height:64px;background:rgba(0,245,255,.08);
-  border:2px solid var(--c);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.4rem;color:var(--c);transition:all .3s;text-decoration:none}
-.v-play:hover{background:var(--c);color:var(--bg);transform:translate(-50%,-50%) scale(1.1)}
-.v-info{padding:22px}
-.v-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;margin-bottom:6px}
-.v-sub{font-size:.86rem;color:var(--dim)}
+/* CINEMATICS */
+#cinematics .cg{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:52px}
+.vc{border:1px solid var(--bdr);background:var(--card);overflow:hidden;transition:border-color .3s,transform .3s}
+.vc:hover{border-color:var(--c);transform:translateY(-4px);box-shadow:var(--glow)}
+.vc.big{grid-column:span 2}
+.vt{width:100%;padding-top:56.25%;position:relative;overflow:hidden}
+.vt iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.vi{padding:20px}
+.vi-t{font-family:'Bebas Neue',sans-serif;font-size:1.45rem;letter-spacing:2px;margin-bottom:5px}
+.vi-s{font-size:.84rem;color:var(--dim)}
 
-/* ════════════════════════════════════════
-   §5 CERTIFICATIONS
-   ════════════════════════════════════════ */
-.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:56px}
-.cert-card{padding:28px;background:var(--card);border:1px solid var(--bdr);
-  clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
-  transition:all .32s;position:relative;overflow:hidden}
-.cert-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(to right,var(--c),var(--c3));
-  transform:scaleX(0);transition:transform .4s;transform-origin:left}
-.cert-card:hover{border-color:var(--c);transform:translateY(-5px);box-shadow:var(--glow)}
+/* CERTIFICATIONS */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin-top:52px}
+.cert-card{padding:26px;background:var(--card);border:1px solid var(--bdr);clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all .32s;position:relative;overflow:hidden}
+.cert-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--c),var(--c3));transform:scaleX(0);transition:transform .4s;transform-origin:left}
+.cert-card:hover{border-color:var(--c);transform:translateY(-4px);box-shadow:var(--glow)}
 .cert-card:hover::before{transform:scaleX(1)}
-.cert-icon{font-size:2.4rem;margin-bottom:14px}
-.cert-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;color:#fff;margin-bottom:7px}
-.cert-iss{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--c);letter-spacing:1px;margin-bottom:9px}
-.cert-desc{font-size:.86rem;color:var(--dim);line-height:1.65}
-.cert-link{display:inline-block;margin-top:12px;padding:5px 14px;border:1px solid var(--c2);
-  font-family:'Space Mono',monospace;font-size:.58rem;color:var(--c2);letter-spacing:1px;transition:all .3s}
+.cert-icon{font-size:2.2rem;margin-bottom:12px}
+.cert-name{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:#fff;margin-bottom:6px}
+.cert-iss{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--c);letter-spacing:1px;margin-bottom:8px}
+.cert-desc{font-size:.84rem;color:var(--dim);line-height:1.65}
+.cert-link{display:inline-block;margin-top:10px;padding:4px 13px;border:1px solid var(--c2);font-family:'Space Mono',monospace;font-size:.56rem;color:var(--c2);letter-spacing:1px;transition:all .3s}
 .cert-link:hover{background:var(--c2);color:var(--bg)}
 
-/* ════════════════════════════════════════
-   §6 3D ART
-   ════════════════════════════════════════ */
-.art-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:56px}
-.art-item{position:relative;overflow:hidden;aspect-ratio:4/3;
-  background:var(--card);border:1px solid var(--bdr);cursor:zoom-in;transition:all .4s}
-.art-item:hover{border-color:var(--c);z-index:2}
+/* 3D ART */
+.art-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:52px}
+.art-item{position:relative;overflow:hidden;aspect-ratio:1;background:var(--card);border:1px solid var(--bdr);cursor:zoom-in;transition:all .4s}
+.art-item:hover{border-color:var(--c);z-index:2;transform:scale(1.03)}
 .art-bg{position:absolute;inset:0;transition:transform .5s}
-.art-item:hover .art-bg{transform:scale(1.09)}
-.art-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(2,4,8,.9),transparent);
-  opacity:0;transition:opacity .32s;display:flex;align-items:flex-end;padding:18px}
+.art-item:hover .art-bg{transform:scale(1.1)}
+.art-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(2,4,8,.92),transparent);opacity:0;transition:opacity .3s;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:14px;text-align:center}
 .art-item:hover .art-ov{opacity:1}
-.art-label{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px}
-/* Art gradients */
+.art-label{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:#fff;margin-bottom:4px}
+.art-sub{font-family:'Space Mono',monospace;font-size:.54rem;color:var(--c);letter-spacing:1px}
 .a1{background:linear-gradient(135deg,#0a1a2a,#1a3d5a,#0a0a2a)}
 .a2{background:linear-gradient(135deg,#1a0a0a,#3d1a1a,#0a1a1a)}
 .a3{background:linear-gradient(135deg,#0a1a0a,#1a3d1a,#1a1a0a)}
-.a4{background:linear-gradient(135deg,#1a0a1a,#0a1a2a,#2a0a2a)}
+.a4{background:linear-gradient(135deg,#1a0a1a,#2a1a3d,#0a0a1a)}
 .a5{background:linear-gradient(135deg,#001a20,#20001a,#0a1a0a)}
 .a6{background:linear-gradient(135deg,#1a1000,#3d2800,#1a0010)}
 .a7{background:linear-gradient(135deg,#0a0a1a,#001a3d,#1a0020)}
 .a8{background:linear-gradient(135deg,#001810,#183018,#101810)}
 
-/* ════════════════════════════════════════
-   §7 CONTACT
-   ════════════════════════════════════════ */
-#contact .cg{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:56px}
-.ci-item{margin-bottom:26px}
-.ci-label{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--dim);
-  letter-spacing:2px;text-transform:uppercase;margin-bottom:7px}
-.ci-val{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:2px;color:var(--c)}
-.c-links{display:flex;flex-direction:column;gap:11px;margin-top:26px}
-.c-link{padding:12px 20px;border:1px solid var(--bdr);display:flex;align-items:center;
-  gap:11px;color:var(--txt);font-family:'Space Mono',monospace;font-size:.66rem;
-  letter-spacing:1px;transition:all .3s;
-  clip-path:polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%)}
-.c-link:hover{border-color:var(--c);color:var(--c);background:rgba(0,245,255,.05);transform:translateX(8px)}
-.c-form{display:flex;flex-direction:column;gap:13px}
-.fl{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--dim);
-  letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;display:block}
-.fi,.fta{width:100%;background:rgba(0,245,255,.03);border:1px solid var(--bdr);
-  color:var(--txt);padding:12px 13px;font-family:'Rajdhani',sans-serif;font-size:1rem;
-  outline:none;transition:border-color .3s;
-  clip-path:polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%)}
-.fi:focus,.fta:focus{border-color:var(--c)}
-.fta{min-height:105px;resize:vertical}
+/* CONTACT */
+#contact .cg{display:grid;grid-template-columns:1fr 1fr;gap:52px;margin-top:52px}
+.ci{margin-bottom:24px}
+.ci-l{font-family:'Space Mono',monospace;font-size:.57rem;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.ci-v{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:var(--c)}
+.cl{display:flex;flex-direction:column;gap:10px;margin-top:24px}
+.clink{padding:11px 18px;border:1px solid var(--bdr);display:flex;align-items:center;gap:10px;color:var(--txt);font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:1px;transition:all .3s;clip-path:polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%)}
+.clink:hover{border-color:var(--c);color:var(--c);background:rgba(0,245,255,.05);transform:translateX(7px)}
 
-/* ════════════════════════════════════════
-   FOOTER
-   ════════════════════════════════════════ */
-footer{padding:36px 56px;border-top:1px solid var(--bdr);
-  display:flex;align-items:center;justify-content:space-between;
-  position:relative;z-index:1;flex-wrap:wrap;gap:14px}
-.f-copy{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--dim);letter-spacing:1px}
-.f-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:3px;color:var(--c);opacity:.3}
+/* MODAL */
+.modal-ov{position:fixed;inset:0;z-index:700;background:rgba(2,4,8,.96);backdrop-filter:blur(22px);display:flex;align-items:center;justify-content:center;padding:32px;opacity:0;pointer-events:none;transition:opacity .4s}
+.modal-ov.open{opacity:1;pointer-events:all}
+.modal-box{max-width:860px;width:100%;max-height:90vh;overflow-y:auto;background:var(--bg2);border:1px solid var(--bdr);transform:translateY(26px);transition:transform .4s;scrollbar-width:thin;scrollbar-color:var(--c) transparent}
+.modal-ov.open .modal-box{transform:translateY(0)}
+.modal-hero{width:100%;padding-top:44%;position:relative;overflow:hidden}
+.mhov{position:absolute;inset:0;background:linear-gradient(to top,var(--bg2) 0%,transparent 60%)}
+.mx{position:absolute;top:14px;right:14px;z-index:10;width:42px;height:42px;background:rgba(2,4,8,.8);border:1px solid var(--bdr);color:var(--txt);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.mx:hover{border-color:var(--c2);color:var(--c2)}
+.mb{padding:32px}
+.mtag{display:inline-block;padding:4px 13px;border:1px solid var(--c2);font-family:'Space Mono',monospace;font-size:.56rem;color:var(--c2);letter-spacing:2px;margin-bottom:12px}
+.mt{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.9rem,5vw,3.4rem);letter-spacing:3px;line-height:.95;margin-bottom:7px}
+.mr{font-family:'Space Mono',monospace;font-size:.64rem;color:var(--c);letter-spacing:2px;margin-bottom:24px}
+.mspecs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
+.ms{padding:12px;background:rgba(0,245,255,.03);border:1px solid var(--bdr);text-align:center}
+.msk{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.msv{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--c);letter-spacing:2px}
+.mdesc{font-size:.97rem;line-height:1.9;color:var(--dim);margin-bottom:24px}
+.mmh{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:3px;color:#fff;margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.mmh::after{content:'';flex:1;height:1px;background:var(--bdr)}
+.ml{display:flex;flex-direction:column;gap:11px;margin-bottom:24px}
+.mech{display:flex;gap:12px;padding:12px;background:rgba(0,245,255,.03);border-left:2px solid var(--c)}
+.mech-i{font-size:1.2rem;flex-shrink:0}
+.mech-n{font-family:'Bebas Neue',sans-serif;font-size:.98rem;letter-spacing:2px;color:#fff;margin-bottom:3px}
+.mech-d{font-size:.82rem;color:var(--dim);line-height:1.55}
+.mlinks{display:flex;gap:10px;flex-wrap:wrap;padding-top:20px;border-top:1px solid var(--bdr)}
 
-/* ════════════════════════════════════════
-   KEYFRAMES
-   ════════════════════════════════════════ */
-@keyframes fu{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fi{from{opacity:0}to{opacity:1}}
-@keyframes sp{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.3;transform:scaleY(.6)}}
-@keyframes g1{0%,100%{transform:none;opacity:0}92%{transform:none;opacity:0}93%{transform:translate(3px,-2px);opacity:.55}94%{transform:none;opacity:0}96%{transform:translate(-3px,2px);opacity:.35}97%{transform:none;opacity:0}}
-@keyframes g2{0%,100%{transform:none;opacity:0}94%{transform:none;opacity:0}95%{transform:translate(-3px,2px);opacity:.45}96%{transform:none;opacity:0}98%{transform:translate(3px,-2px);opacity:.25}99%{transform:none;opacity:0}}
-
-/* ════════════════════════════════════════
-   RESPONSIVE
-   ════════════════════════════════════════ */
-@media(max-width:1100px){
-  nav{padding:0 26px}
-  .nav-links{gap:3px}
-  .nav-links a{padding:5px 8px;font-size:.56rem}
-}
 @media(max-width:860px){
-  .nav-links{display:none}
-  .ham{display:flex}
-  .wrap,.wrap-sm{padding:72px 22px}
-  #about .inner{grid-template-columns:1fr;gap:40px}
-  .games{grid-template-columns:1fr}
-  .gc.span2{grid-column:span 1}
-  #cinematics .cine-grid{grid-template-columns:1fr}
-  .v-card.big{grid-column:span 1}
-  .art-grid{grid-template-columns:1fr 1fr}
-  #contact .cg{grid-template-columns:1fr;gap:36px}
-  footer{padding:26px 22px}
-  .hero-socials{display:none}
+  #about .inner{grid-template-columns:1fr;gap:36px}
+  .games{grid-template-columns:1fr}.gc.s2{grid-column:span 1}
+  #cinematics .cg{grid-template-columns:1fr}.vc.big{grid-column:span 1}
+  .art-grid{grid-template-columns:repeat(2,1fr)}
+  #contact .cg{grid-template-columns:1fr}
+  .hero-soc{display:none}
   #home{padding:120px 22px 56px}
-  .modal-specs{grid-template-columns:1fr 1fr}
 }
-@media(max-width:540px){
-  .art-grid{grid-template-columns:1fr}
-  .cert-grid{grid-template-columns:1fr}
-  .stats{grid-template-columns:1fr 1fr}
-}
+@media(max-width:540px){.art-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
-
-<!-- Cursor -->
-<div id="cur"></div>
-<div id="cur-ring"></div>
-
-<!-- Background canvas -->
+<div id="cur"></div><div id="crng"></div>
 <canvas id="bgc"></canvas>
-
-<!-- Page transition overlay -->
 <div id="pt"></div>
 
-<!-- ══ NAV ══ -->
-<nav id="mainnav">
-  <div class="nav-logo">SB</div>
-  <ul class="nav-links" id="navlinks">
-    <li><a href="#home"          class="act" data-s="home">Home</a></li>
-    <li><a href="about.html"                >About</a></li>
-    <li><a href="cv.html"                   >CV</a></li>
-    <li><a href="leveldesign.html"          >Level Design</a></li>
-    <li><a href="projects.html"             >Projects</a></li>
-    <li><a href="certifications.html"       >Certifications</a></li>
-    <li><a href="cinematics.html"           >Cinematics</a></li>
-    <li><a href="artworks.html"             >3D Artworks</a></li>
+<nav>
+  <a href="index.html" class="nav-logo">SB</a>
+  <ul class="nav-links">
+    <li><a href="#home"                class="act" data-s="home">Home</a></li>
+    <li><a href="pages/about.html"                              >About</a></li>
+    <li><a href="pages/cv.html"                                 >CV</a></li>
+    <li><a href="https://saibhargav7599.github.io/operation-blackout/#goal" target="_blank">Level Design</a></li>
+    <li><a href="pages/projects.html"                           >Projects</a></li>
+    <li><a href="pages/certifications.html"                     >Certifications</a></li>
+    <li><a href="pages/cinematics.html"                         >Cinematics</a></li>
+    <li><a href="pages/artworks.html"                           >3D Artworks</a></li>
   </ul>
-  <button class="ham" id="ham" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="ham" id="ham"><span></span><span></span><span></span></button>
 </nav>
 <div id="mobnav">
-  <a href="#home"           onclick="closeMob()">Home</a>
-  <a href="about.html"                          >About</a>
-  <a href="cv.html"                             >CV</a>
-  <a href="leveldesign.html"                    >Level Design</a>
-  <a href="projects.html"                       >Projects</a>
-  <a href="certifications.html"                 >Certifications</a>
-  <a href="cinematics.html"                     >Cinematics</a>
-  <a href="artworks.html"                       >3D Artworks</a>
+  <a href="#home">Home</a>
+  <a href="pages/about.html">About</a>
+  <a href="pages/cv.html">CV</a>
+  <a href="https://saibhargav7599.github.io/operation-blackout/#goal" target="_blank">Level Design</a>
+  <a href="pages/projects.html">Projects</a>
+  <a href="pages/certifications.html">Certifications</a>
+  <a href="pages/cinematics.html">Cinematics</a>
+  <a href="pages/artworks.html">3D Artworks</a>
 </div>
 
 <main>
 
-<!-- ══════════════════════════════════════
-     §1  HERO
-══════════════════════════════════════ -->
+<!-- ═══ HERO ═══ -->
 <section id="home" class="s">
   <div class="hero-inner">
-    <div class="hero-socials">
+    <div class="hero-soc">
       <a href="https://www.linkedin.com/in/saibhargav7599" target="_blank">LinkedIn</a>
       <a href="http://sai_bhargav.artstation.com"          target="_blank">ArtStation</a>
       <a href="https://youtu.be/WuV2wXUhXF0"              target="_blank">YouTube</a>
     </div>
     <span class="hero-tag">// Game Designer Portfolio</span>
     <h1 class="hero-name" data-t="SAI BHARGAV">SAI BHARGAV</h1>
-    <h2 class="hero-sub-title">Game Designer</h2>
+    <h2 class="hero-sub-t">Game Designer</h2>
     <p class="hero-desc">A Master's degree and proven industry experience in building standout gameplay — crafting captivating, immersive worlds from concept to reality.</p>
     <div class="hero-ctas">
       <a href="#portfolio" class="btn btn-p">View Portfolio</a>
       <a href="#contact"   class="btn btn-g">Get In Touch</a>
     </div>
-    <div class="scroll-hint">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
-    </div>
+    <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     §2  ABOUT
-══════════════════════════════════════ -->
+<!-- ═══ ABOUT ═══ -->
 <section id="about" class="s">
   <div class="wrap">
     <div class="inner">
-      <!-- Left -->
       <div class="rev">
         <div class="sec-label">About Me</div>
         <h2 class="sec-title">THE DESIGNER<br>BEHIND THE GAME</h2>
-        <div class="about-text" style="margin-top:22px">
+        <div class="about-text" style="margin-top:20px">
           <p>Dynamic Game Designer with over two years of experience, specializing in balancing gameplay mechanics, crafting immersive levels, and leveraging analytics to enhance player engagement and retention.</p>
-          <p>Successfully contributed to two titles achieving 50k+ downloads on Google Play Store. Skilled in VR/AR development, combining artistic vision with practical execution. A strong collaborator, adept at delivering high-quality results under tight deadlines.</p>
+          <p>Successfully contributed to two titles achieving <strong style="color:var(--c)">50k+ downloads</strong> on Google Play Store. Skilled in VR/AR development, combining artistic vision with practical execution. A strong collaborator, adept at delivering high-quality results under tight deadlines.</p>
           <p>I work to evoke emotion and strive for perfection — collaborating well with others to generate and execute ideas under tight deadlines.</p>
         </div>
+        <div style="margin-top:16px">
+          <a href="https://www.linkedin.com/in/saibhargav7599" target="_blank" style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--c);letter-spacing:1px;border-bottom:1px solid var(--bdr2);padding-bottom:2px">🔗 linkedin.com/in/saibhargav7599</a>
+        </div>
         <div class="tags">
-          <span class="tag">Unity 3D</span>
-          <span class="tag">Unreal Engine</span>
-          <span class="tag">Gameplay Mechanics</span>
-          <span class="tag">Prototyping</span>
-          <span class="tag">Level Design</span>
-          <span class="tag">Maya</span>
-          <span class="tag">Adobe Premiere Pro</span>
-          <span class="tag">Adobe Photoshop</span>
-          <span class="tag">Systems Design</span>
-          <span class="tag">GDD Writing</span>
-          <span class="tag">VR/AR</span>
+          <span class="tag">Unity 3D</span><span class="tag">Unreal Engine</span>
+          <span class="tag">Gameplay Mechanics</span><span class="tag">Prototyping</span>
+          <span class="tag">Level Design</span><span class="tag">Maya</span>
+          <span class="tag">Adobe Premiere Pro</span><span class="tag">Adobe Photoshop</span>
+          <span class="tag">Systems Design</span><span class="tag">GDD Writing</span><span class="tag">VR/AR</span>
         </div>
         <div class="stats">
           <div class="stat rev d1"><div class="stat-n">6+</div><div class="stat-l">Games Designed</div></div>
           <div class="stat rev d2"><div class="stat-n">2+</div><div class="stat-l">Years Experience</div></div>
-          <div class="stat rev d3"><div class="stat-n">MA</div><div class="stat-l">Game Design Degree</div></div>
+          <div class="stat rev d3"><div class="stat-n">MA</div><div class="stat-l">Game Design</div></div>
         </div>
-        <div style="margin-top:28px">
-          <a href="about.html" class="btn btn-g btn-sm">Read Full Bio →</a>
+        <div style="margin-top:26px">
+          <a href="pages/about.html" class="btn btn-g btn-sm">Read Full Bio →</a>
         </div>
       </div>
-      <!-- Right — 3D tilt exp card -->
+      <!-- 3D tilt card -->
       <div class="rev-r d2">
         <div class="exp-card" id="expc">
           <div class="exp-card-inner" id="expi">
@@ -538,11 +277,11 @@ footer{padding:36px 56px;border-top:1px solid var(--bdr);
               <div class="exp-per">May 2021 – Oct 2021 · Hyderabad, India · Remote</div>
             </div>
             <div style="margin-top:20px">
-              <div class="sec-label" style="margin-bottom:10px">Education</div>
-              <div class="exp-role" style="font-size:.98rem;margin-bottom:3px">MA Game Design (2022–2024)</div>
-              <div class="exp-per" style="margin-bottom:12px">Teesside University · Credits 120/120 · Grade 72.82</div>
-              <div class="exp-role" style="font-size:.98rem;margin-bottom:3px">BSc Multimedia — Gaming (2017–2021)</div>
-              <div class="exp-per">Jawaharlal Nehru Technological University · Grade: 72.82</div>
+              <div class="sec-label" style="margin-bottom:9px">Education</div>
+              <div class="exp-role" style="font-size:.96rem;margin-bottom:3px">MA Game Design (2022–2024)</div>
+              <div class="exp-per" style="margin-bottom:11px">Teesside University · Credits: 120/120</div>
+              <div class="exp-role" style="font-size:.96rem;margin-bottom:3px">Bachelor's in Multimedia (2017–2021)</div>
+              <div class="exp-per">Jawaharlal Nehru Technological University</div>
             </div>
           </div>
         </div>
@@ -553,36 +292,29 @@ footer{padding:36px 56px;border-top:1px solid var(--bdr);
 
 <div class="divider s"></div>
 
-<!-- ══════════════════════════════════════
-     §3  PORTFOLIO
-══════════════════════════════════════ -->
+<!-- ═══ PORTFOLIO ═══ -->
 <section id="portfolio" class="s">
   <div class="wrap">
-    <div class="header rev">
+    <div class="ph rev">
       <div class="sec-label" style="justify-content:center">My Work</div>
       <h2 class="sec-title">PORTFOLIO</h2>
     </div>
     <div class="games">
 
       <!-- 01 Hotel Luxe Inn -->
-      <div class="gc span2 rev" onclick="openM('hotel')">
+      <div class="gc s2 rev" onclick="openM('hotel')">
         <div class="gt">
-          <div class="gt-bg th-hotel">
-            <div class="th-deco"><svg viewBox="0 0 200 200" fill="none"><rect x="28" y="28" width="144" height="144" stroke="white" stroke-width="1"/><rect x="48" y="48" width="104" height="104" stroke="white" stroke-width="1" transform="rotate(18 100 100)"/><circle cx="100" cy="100" r="24" stroke="white" stroke-width="1"/></svg></div>
-          </div>
-          <div class="gt-ov"></div>
-          <div class="gt-num">01</div>
-          <div class="gt-badge">MASTER'S PROJECT</div>
+          <div class="gt-bg th-hotel"><div class="tdeco"><svg viewBox="0 0 200 200" fill="none"><rect x="28" y="28" width="144" height="144" stroke="white" stroke-width="1"/><rect x="48" y="48" width="104" height="104" stroke="white" stroke-width="1" transform="rotate(18 100 100)"/><circle cx="100" cy="100" r="24" stroke="white" stroke-width="1"/></svg></div></div>
+          <div class="gt-ov"></div><div class="gt-n">01</div><div class="gt-b">MASTER'S PROJECT</div>
+          <div class="gt-yt"><a href="https://youtu.be/xCHTsjbmJTY" target="_blank" onclick="event.stopPropagation()" class="yt-pill">▶ WATCH TRAILER</a></div>
         </div>
         <div class="gi">
           <div class="gi-genre">Management Simulation · PC · 2024</div>
           <div class="gi-name">HOTEL LUXE INN: MANAGER'S CHALLENGE</div>
           <div class="gi-desc">A serious game putting you in the shoes of a busy hotel manager. Timed tasks across reservations, room service, kitchen management and dining — all about efficient time management and real hospitality skills.</div>
           <div class="gi-meta">
-            <div class="gm-i"><span>Year</span>2024</div>
-            <div class="gm-i"><span>Platform</span>PC</div>
-            <div class="gm-i"><span>Engine</span>Unity 3D</div>
-            <div class="garrow">→</div>
+            <div class="gmi"><span>Year</span>2024</div><div class="gmi"><span>Platform</span>PC</div><div class="gmi"><span>Engine</span>Unity 3D</div>
+            <div class="garr">→</div>
           </div>
         </div>
       </div>
@@ -590,19 +322,17 @@ footer{padding:36px 56px;border-top:1px solid var(--bdr);
       <!-- 02 Evil Legacy -->
       <div class="gc rev d1" onclick="openM('evil')">
         <div class="gt">
-          <div class="gt-bg th-evil"><div class="th-deco"><svg viewBox="0 0 200 200" fill="none"><polygon points="100,14 186,166 14,166" stroke="white" stroke-width="1"/><circle cx="100" cy="120" r="19" stroke="white" stroke-width="1"/></svg></div></div>
-          <div class="gt-ov"></div><div class="gt-num">02</div>
-          <div class="gt-badge">RATIONAL DESIGN</div>
+          <div class="gt-bg th-evil"><div class="tdeco"><svg viewBox="0 0 200 200" fill="none"><polygon points="100,14 186,166 14,166" stroke="white" stroke-width="1"/><circle cx="100" cy="120" r="19" stroke="white" stroke-width="1"/></svg></div></div>
+          <div class="gt-ov"></div><div class="gt-n">02</div><div class="gt-b">RATIONAL DESIGN</div>
+          <div class="gt-yt"><a href="https://youtu.be/Bc49S2FR3qk" target="_blank" onclick="event.stopPropagation()" class="yt-pill">▶ WATCH TRAILER</a></div>
         </div>
         <div class="gi">
           <div class="gi-genre">FPS Fantasy Adventure · PC · 2023</div>
           <div class="gi-name">EVIL LEGACY</div>
           <div class="gi-desc">Fantasy FPS with magic, combat, and exploration. Battle corrupted forest creatures as a young wizard wielding four unique spells — Diffindo, Protego, Impedimenta, and Avada Kedavra.</div>
           <div class="gi-meta">
-            <div class="gm-i"><span>Year</span>2023</div>
-            <div class="gm-i"><span>Genre</span>FPS</div>
-            <div class="gm-i"><span>Engine</span>Unreal</div>
-            <div class="garrow">→</div>
+            <div class="gmi"><span>Year</span>2023</div><div class="gmi"><span>Genre</span>FPS</div><div class="gmi"><span>Engine</span>Unreal</div>
+            <div class="garr">→</div>
           </div>
         </div>
       </div>
@@ -610,19 +340,17 @@ footer{padding:36px 56px;border-top:1px solid var(--bdr);
       <!-- 03 Escape Hunt -->
       <div class="gc rev d2" onclick="openM('escape')">
         <div class="gt">
-          <div class="gt-bg th-escape"><div class="th-deco"><svg viewBox="0 0 200 200" fill="none"><rect x="18" y="53" width="164" height="102" stroke="white" stroke-width="1"/><rect x="38" y="73" width="42" height="42" stroke="white" stroke-width="1"/><rect x="98" y="73" width="62" height="56" stroke="white" stroke-width="1"/></svg></div></div>
-          <div class="gt-ov"></div><div class="gt-num">03</div>
-          <div class="gt-badge">STEALTH ADVENTURE</div>
+          <div class="gt-bg th-escape"><div class="tdeco"><svg viewBox="0 0 200 200" fill="none"><rect x="18" y="53" width="164" height="102" stroke="white" stroke-width="1"/><rect x="38" y="73" width="42" height="42" stroke="white" stroke-width="1"/><rect x="98" y="73" width="62" height="56" stroke="white" stroke-width="1"/></svg></div></div>
+          <div class="gt-ov"></div><div class="gt-n">03</div><div class="gt-b">STEALTH ADVENTURE</div>
+          <div class="gt-yt"><a href="https://youtu.be/lqwcb-ts59o4" target="_blank" onclick="event.stopPropagation()" class="yt-pill">▶ WATCH TRAILER</a></div>
         </div>
         <div class="gi">
           <div class="gi-genre">Stealth Adventure · PC · 2023</div>
           <div class="gi-name">ESCAPE HUNT</div>
-          <div class="gi-desc">Play as a Box trapped in a guarded warehouse. Navigate vents, observe guard patterns, solve puzzles and escape using stealth and cunning in this heart-pounding adventure.</div>
+          <div class="gi-desc">Play as a Box trapped in a guarded warehouse. Navigate vents, observe guard patterns, solve puzzles and escape using stealth and cunning.</div>
           <div class="gi-meta">
-            <div class="gm-i"><span>Year</span>2023</div>
-            <div class="gm-i"><span>Role</span>Solo</div>
-            <div class="gm-i"><span>Genre</span>Stealth</div>
-            <div class="garrow">→</div>
+            <div class="gmi"><span>Year</span>2023</div><div class="gmi"><span>Role</span>Solo</div><div class="gmi"><span>Genre</span>Stealth</div>
+            <div class="garr">→</div>
           </div>
         </div>
       </div>
@@ -630,19 +358,17 @@ footer{padding:36px 56px;border-top:1px solid var(--bdr);
       <!-- 04 Dystopian -->
       <div class="gc rev d1" onclick="openM('dystopian')">
         <div class="gt">
-          <div class="gt-bg th-dystopian"><div class="th-deco"><svg viewBox="0 0 200 200" fill="none"><circle cx="100" cy="100" r="72" stroke="white" stroke-width="1"/><circle cx="100" cy="100" r="44" stroke="white" stroke-width="1"/><line x1="28" y1="100" x2="172" y2="100" stroke="white" stroke-width="1"/><line x1="100" y1="28" x2="100" y2="172" stroke="white" stroke-width="1"/></svg></div></div>
-          <div class="gt-ov"></div><div class="gt-num">04</div>
-          <div class="gt-badge">GAME MECHANICS</div>
+          <div class="gt-bg th-dystopian"><div class="tdeco"><svg viewBox="0 0 200 200" fill="none"><circle cx="100" cy="100" r="72" stroke="white" stroke-width="1"/><circle cx="100" cy="100" r="44" stroke="white" stroke-width="1"/><line x1="28" y1="100" x2="172" y2="100" stroke="white" stroke-width="1"/><line x1="100" y1="28" x2="100" y2="172" stroke="white" stroke-width="1"/></svg></div></div>
+          <div class="gt-ov"></div><div class="gt-n">04</div><div class="gt-b">GAME MECHANICS</div>
+          <div class="gt-yt"><a href="https://youtu.be/FyTiHAGFq24" target="_blank" onclick="event.stopPropagation()" class="yt-pill">▶ WATCH TRAILER</a></div>
         </div>
         <div class="gi">
           <div class="gi-genre">Action TPS · PC · 2022</div>
           <div class="gi-name">DYSTOPIAN</div>
           <div class="gi-desc">TPS set in Exeter Cyber City 2055. Four innovative mechanics: Snail's Pace bullet-time, FLING object launching, Dual Jump + Fall Blast, and precision Laser Rifle combat.</div>
           <div class="gi-meta">
-            <div class="gm-i"><span>Year</span>2022</div>
-            <div class="gm-i"><span>Setting</span>Sci-Fi</div>
-            <div class="gm-i"><span>View</span>TPS</div>
-            <div class="garrow">→</div>
+            <div class="gmi"><span>Year</span>2022</div><div class="gmi"><span>Setting</span>Sci-Fi</div><div class="gmi"><span>View</span>TPS</div>
+            <div class="garr">→</div>
           </div>
         </div>
       </div>
@@ -650,19 +376,17 @@ footer{padding:36px 56px;border-top:1px solid var(--bdr);
       <!-- 05 Hollyhill -->
       <div class="gc rev d2" onclick="openM('hollyhill')">
         <div class="gt">
-          <div class="gt-bg th-hollyhill"><div class="th-deco"><svg viewBox="0 0 200 200" fill="none"><path d="M18,162 Q58,58 100,78 Q142,98 182,38" stroke="white" stroke-width="1" fill="none"/><circle cx="58" cy="84" r="13" stroke="white" stroke-width="1"/></svg></div></div>
-          <div class="gt-ov"></div><div class="gt-num">05</div>
-          <div class="gt-badge">MISSION DESIGN</div>
+          <div class="gt-bg th-hollyhill"><div class="tdeco"><svg viewBox="0 0 200 200" fill="none"><path d="M18,162 Q58,58 100,78 Q142,98 182,38" stroke="white" stroke-width="1" fill="none"/><circle cx="58" cy="84" r="13" stroke="white" stroke-width="1"/></svg></div></div>
+          <div class="gt-ov"></div><div class="gt-n">05</div><div class="gt-b">MISSION DESIGN</div>
+          <div class="gt-yt"><a href="https://youtu.be/CTgqu1qcPm8" target="_blank" onclick="event.stopPropagation()" class="yt-pill">▶ WATCH TRAILER</a></div>
         </div>
         <div class="gi">
           <div class="gi-genre">Mission Design · PC · 2023</div>
           <div class="gi-name">HOLLYHILL PENINSULA ISLAND</div>
-          <div class="gi-desc">Open-world mission design on a crafted island. Explores narrative-driven quests, world-building, and environmental storytelling.</div>
+          <div class="gi-desc">Open-world mission design on a crafted island. Narrative-driven quests, world-building, and environmental storytelling.</div>
           <div class="gi-meta">
-            <div class="gm-i"><span>Year</span>2023</div>
-            <div class="gm-i"><span>Focus</span>Mission</div>
-            <div class="gm-i"><span>Type</span>Open</div>
-            <div class="garrow">→</div>
+            <div class="gmi"><span>Year</span>2023</div><div class="gmi"><span>Focus</span>Mission</div><div class="gmi"><span>Type</span>Open</div>
+            <div class="garr">→</div>
           </div>
         </div>
       </div>
@@ -670,216 +394,137 @@ footer{padding:36px 56px;border-top:1px solid var(--bdr);
       <!-- 06 Persona -->
       <div class="gc rev d3" onclick="openM('persona')">
         <div class="gt">
-          <div class="gt-bg th-persona"><div class="th-deco"><svg viewBox="0 0 200 200" fill="none"><circle cx="100" cy="76" r="35" stroke="white" stroke-width="1"/><path d="M54,168 Q54,116 100,116 Q146,116 146,168" stroke="white" stroke-width="1" fill="none"/></svg></div></div>
-          <div class="gt-ov"></div><div class="gt-num">06</div>
-          <div class="gt-badge">LEAD DESIGNER</div>
+          <div class="gt-bg th-persona"><div class="tdeco"><svg viewBox="0 0 200 200" fill="none"><circle cx="100" cy="76" r="35" stroke="white" stroke-width="1"/><path d="M54,168 Q54,116 100,116 Q146,116 146,168" stroke="white" stroke-width="1" fill="none"/></svg></div></div>
+          <div class="gt-ov"></div><div class="gt-n">06</div><div class="gt-b">LEAD DESIGNER</div>
+          <div class="gt-yt"><a href="https://youtu.be/4iclQtB6GZg" target="_blank" onclick="event.stopPropagation()" class="yt-pill">▶ WATCH TRAILER</a></div>
         </div>
         <div class="gi">
           <div class="gi-genre">Visual Novel · PC · 2019</div>
           <div class="gi-name">PERSONA</div>
           <div class="gi-desc">Dark detective visual novel. A woman confesses to triple homicide — no bodies found. Navigate a twisting psychological investigation where your Fear is your killer.</div>
           <div class="gi-meta">
-            <div class="gm-i"><span>Year</span>2019</div>
-            <div class="gm-i"><span>Genre</span>Visual Novel</div>
-            <div class="gm-i"><span>Role</span>Lead</div>
-            <div class="garrow">→</div>
+            <div class="gmi"><span>Year</span>2019</div><div class="gmi"><span>Genre</span>Visual Novel</div><div class="gmi"><span>Role</span>Lead</div>
+            <div class="garr">→</div>
           </div>
         </div>
       </div>
 
     </div><!-- /games -->
-    <div style="text-align:center;margin-top:48px" class="rev">
-      <a href="projects.html" class="btn btn-g">View All Projects →</a>
+    <div style="text-align:center;margin-top:44px" class="rev">
+      <a href="pages/projects.html" class="btn btn-g">View All Projects →</a>
     </div>
-  </div><!-- /wrap -->
+  </div>
 </section>
 
 <div class="divider s"></div>
 
-<!-- ══════════════════════════════════════
-     §4  CINEMATICS
-══════════════════════════════════════ -->
+<!-- ═══ CINEMATICS ═══ -->
 <section id="cinematics" class="s">
   <div class="wrap">
     <div class="rev">
       <div class="sec-label">Video Work</div>
       <h2 class="sec-title">CINEMATICS</h2>
-      <p style="margin-top:14px;color:var(--dim);font-size:1rem;max-width:660px;line-height:1.8">Sharing my journey into the world of cinematic storytelling — cinematic short films as final products. Projects in Unreal Engine exploring particle systems, rigged asset integration, and Sequencer.</p>
+      <p style="margin-top:13px;color:var(--dim);font-size:1rem;max-width:640px;line-height:1.8">Sharing my journey into the world of cinematic storytelling — short films built in Unreal Engine exploring particle systems, rigged asset integration, and Sequencer.</p>
     </div>
-    <div class="cine-grid">
-
-      <!-- Video 1 — Turtles of the River -->
-      <div class="v-card big rev d1">
-        <div class="v-thumb">
-          <iframe src="https://www.youtube.com/embed/MtHFH9TKUNU" allowfullscreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            title="Turtles of the River"></iframe>
-        </div>
-        <div class="v-info">
-          <div class="v-title">TURTLE'S OF THE RIVER</div>
-          <div class="v-sub">Cinematic Short Film · Unreal Engine · Particle Systems & Rigged Assets</div>
-        </div>
+    <div class="cg">
+      <div class="vc big rev d1">
+        <div class="vt"><iframe src="https://www.youtube.com/embed/MtHFH9TKUNU" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="Turtles of the River"></iframe></div>
+        <div class="vi"><div class="vi-t">TURTLE'S OF THE RIVER</div><div class="vi-s">Cinematic Short Film · Unreal Engine · Particle Systems & Rigged Assets</div></div>
       </div>
-
-      <!-- Video 2 — Tread -->
-      <div class="v-card rev d2">
-        <div class="v-thumb">
-          <iframe src="https://www.youtube.com/embed/H4q071MfOUA" allowfullscreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            title="Tread"></iframe>
-        </div>
-        <div class="v-info">
-          <div class="v-title">TREAD</div>
-          <div class="v-sub">Cinematic Short Film · Unreal Engine · Sequencer</div>
-        </div>
+      <div class="vc rev d2">
+        <div class="vt"><iframe src="https://www.youtube.com/embed/H4q071MfOUA" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="Tread"></iframe></div>
+        <div class="vi"><div class="vi-t">TREAD</div><div class="vi-s">Cinematic Short Film · Unreal Engine · Sequencer</div></div>
       </div>
-
-      <!-- Video 3 — Drivers Paradise -->
-      <div class="v-card rev d3">
-        <div class="v-thumb">
-          <iframe src="https://www.youtube.com/embed/R0u9nKQDk5s" allowfullscreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            title="Drivers Paradise"></iframe>
-        </div>
-        <div class="v-info">
-          <div class="v-title">DRIVERS PARADISE</div>
-          <div class="v-sub">Cinematic Short Film · Unreal Engine · Animation Integration</div>
-        </div>
+      <div class="vc rev d3">
+        <div class="vt"><iframe src="https://www.youtube.com/embed/R0u9nKQDk5s" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="Drivers Paradise"></iframe></div>
+        <div class="vi"><div class="vi-t">DRIVERS PARADISE</div><div class="vi-s">Cinematic Short Film · Unreal Engine · Animation Integration</div></div>
       </div>
-
     </div>
-    <div style="text-align:center;margin-top:36px" class="rev">
-      <a href="cinematics.html" class="btn btn-g btn-sm">View All Cinematics →</a>
-    </div>
+    <div style="text-align:center;margin-top:32px" class="rev"><a href="pages/cinematics.html" class="btn btn-g btn-sm">View Full Cinematics Page →</a></div>
   </div>
 </section>
 
 <div class="divider s"></div>
 
-<!-- ══════════════════════════════════════
-     §5  CERTIFICATIONS
-══════════════════════════════════════ -->
+<!-- ═══ CERTIFICATIONS ═══ -->
 <section id="certifications" class="s">
   <div class="wrap">
-    <div class="rev">
-      <div class="sec-label">Credentials</div>
-      <h2 class="sec-title">CERTIFICATIONS</h2>
-    </div>
+    <div class="rev"><div class="sec-label">Credentials</div><h2 class="sec-title">CERTIFICATIONS</h2></div>
     <div class="cert-grid">
-
-      <div class="cert-card rev">
-        <div class="cert-icon">🎓</div>
-        <div class="cert-name">MA GAME DESIGN</div>
-        <div class="cert-iss">Teesside University · 2022–2024</div>
-        <div class="cert-desc">Master's degree with advanced practice. Credits: 120/120. Specialising in game mechanics, level design, and serious games. Grade: 72.82.</div>
-      </div>
-
-      <div class="cert-card rev d1">
-        <div class="cert-icon">🖥️</div>
-        <div class="cert-name">BSc MULTIMEDIA — GAMING</div>
-        <div class="cert-iss">JNTUH, India · 2017–2021</div>
-        <div class="cert-desc">Bachelor of Multimedia with Gaming specialisation. Four-year undergraduate covering game development, 3D art, and interactive media.</div>
-      </div>
-
-      <div class="cert-card rev d2">
-        <div class="cert-icon">🏆</div>
-        <div class="cert-name">LEVEL DESIGN MASTERY</div>
-        <div class="cert-iss">Bootcamp — Zamfir Stefan</div>
-        <div class="cert-desc">Level Design Mastery Bootcamp led by industry veteran Zamfir Stefan. Advanced techniques in spatial design, player flow, and encounter design.</div>
-      </div>
-
-      <div class="cert-card rev d3">
-        <div class="cert-icon">💡</div>
-        <div class="cert-name">ENTERPRISE DESIGN THINKING</div>
-        <div class="cert-iss">IBM · Practitioner Certified</div>
-        <div class="cert-desc">IBM's Enterprise Design Thinking Practitioner certification. Human-centered design principles applied to complex business challenges.</div>
-        <a href="https://www.credly.com/badges/22b0f77b-650d-498f-88ce-130d56663ffd/linked_in_profile"
-           target="_blank" class="cert-link">View Certificate →</a>
-      </div>
-
-      <div class="cert-card rev d2">
-        <div class="cert-icon">🎮</div>
-        <div class="cert-name">UNITY 3D — ADVANCED</div>
-        <div class="cert-iss">Unity Technologies</div>
-        <div class="cert-desc">Advanced proficiency in Unity 3D — gameplay systems, scripting, UI/UX, physics, and production pipelines for PC and mobile.</div>
-      </div>
-
-      <div class="cert-card rev d3">
-        <div class="cert-icon">⚙️</div>
-        <div class="cert-name">UNREAL ENGINE 5</div>
-        <div class="cert-iss">Epic Games · Certified</div>
-        <div class="cert-desc">Advanced proficiency in UE5 — Blueprints, level streaming, lighting, Sequencer, and blockout production for AAA-quality levels.</div>
-      </div>
-
+      <div class="cert-card rev"><div class="cert-icon">🎓</div><div class="cert-name">MA GAME DESIGN</div><div class="cert-iss">Teesside University · 2022–2024</div><div class="cert-desc">Master's with advanced practice. Credits: 120/120. Specialising in game mechanics, level design, and serious games.</div></div>
+      <div class="cert-card rev d1"><div class="cert-icon">🖥️</div><div class="cert-name">BACHELOR'S IN MULTIMEDIA</div><div class="cert-iss">JNTUH, India · 2017–2021</div><div class="cert-desc">Bachelor's in Multimedia with Gaming specialisation covering game development, 3D art, and interactive media.</div></div>
+      <div class="cert-card rev d2"><div class="cert-icon">🏆</div><div class="cert-name">LEVEL DESIGN MASTERY</div><div class="cert-iss">Bootcamp · Zamfir Stefan</div><div class="cert-desc">Level Design Mastery Bootcamp led by industry veteran Zamfir Stefan. Advanced techniques in spatial design, player flow, and encounter design.</div></div>
+      <div class="cert-card rev d3"><div class="cert-icon">💡</div><div class="cert-name">ENTERPRISE DESIGN THINKING</div><div class="cert-iss">IBM · Practitioner Certified</div><div class="cert-desc">IBM's Enterprise Design Thinking Practitioner. Human-centered design principles applied to complex business and design challenges.</div><a href="https://www.credly.com/badges/22b0f77b-650d-498f-88ce-130d56663ffd/linked_in_profile" target="_blank" class="cert-link">View Certificate →</a></div>
     </div>
+    <div style="text-align:center;margin-top:32px" class="rev"><a href="pages/certifications.html" class="btn btn-g btn-sm">View All Certifications →</a></div>
   </div>
 </section>
 
 <div class="divider s"></div>
 
-<!-- ══════════════════════════════════════
-     §6  3D ARTWORKS
-══════════════════════════════════════ -->
+<!-- ═══ 3D ART ═══ -->
 <section id="art" class="s">
   <div class="wrap">
-    <div class="rev">
-      <div class="sec-label">Visual Work</div>
-      <h2 class="sec-title">3D ART WORKS</h2>
-    </div>
+    <div class="rev"><div class="sec-label">Visual Work</div><h2 class="sec-title">3D ART WORKS</h2></div>
     <div class="art-grid">
-      <div class="art-item rev"><div class="art-bg a1"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.18"><svg width="65%" height="65%" viewBox="0 0 200 200" fill="none"><rect x="40" y="60" width="120" height="80" stroke="cyan" stroke-width="1"/><rect x="70" y="40" width="60" height="20" stroke="cyan" stroke-width="1"/><line x1="40" y1="140" x2="20" y2="170" stroke="cyan" stroke-width="1"/><line x1="160" y1="140" x2="180" y2="170" stroke="cyan" stroke-width="1"/><line x1="100" y1="60" x2="100" y2="10" stroke="cyan" stroke-width="1"/><circle cx="100" cy="8" r="5" fill="cyan" opacity=".5"/></svg></div></div><div class="art-ov"><div class="art-label">SCI-FI MEDKIT</div></div></div>
-      <div class="art-item rev d1"><div class="art-bg a2"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.18"><svg width="65%" height="65%" viewBox="0 0 200 200" fill="none"><rect x="30" y="90" width="140" height="70" stroke="#ff8e8e" stroke-width="1"/><ellipse cx="100" cy="90" rx="50" ry="20" stroke="#ff8e8e" stroke-width="1"/><circle cx="50" cy="150" r="18" stroke="#ff8e8e" stroke-width="1"/><circle cx="150" cy="150" r="18" stroke="#ff8e8e" stroke-width="1"/><rect x="70" y="50" width="60" height="40" stroke="#ff8e8e" stroke-width="1"/></svg></div></div><div class="art-ov"><div class="art-label">VINTAGE MINI TRUCK</div></div></div>
-      <div class="art-item rev d2"><div class="art-bg a3"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.18"><svg width="65%" height="65%" viewBox="0 0 200 200" fill="none"><rect x="20" y="60" width="60" height="120" stroke="#8eff8e" stroke-width="1"/><rect x="120" y="60" width="60" height="120" stroke="#8eff8e" stroke-width="1"/><rect x="20" y="60" width="160" height="30" stroke="#8eff8e" stroke-width="1"/></svg></div></div><div class="art-ov"><div class="art-label">BARRICADE</div></div></div>
-      <div class="art-item rev d1"><div class="art-bg a4"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.18"><svg width="65%" height="65%" viewBox="0 0 200 200" fill="none"><rect x="20" y="60" width="160" height="100" stroke="#bf8eff" stroke-width="1"/><line x1="20" y1="60" x2="40" y2="40" stroke="#bf8eff" stroke-width="1"/><line x1="180" y1="60" x2="160" y2="40" stroke="#bf8eff" stroke-width="1"/><line x1="40" y1="40" x2="160" y2="40" stroke="#bf8eff" stroke-width="1"/><rect x="40" y="40" width="120" height="20" stroke="#bf8eff" stroke-width="1"/></svg></div></div><div class="art-ov"><div class="art-label">CONTAINER</div></div></div>
-      <div class="art-item rev d2"><div class="art-bg a5"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.18"><svg width="65%" height="65%" viewBox="0 0 200 200" fill="none"><rect x="40" y="60" width="120" height="100" stroke="#ffbf6e" stroke-width="1"/><line x1="40" y1="80" x2="160" y2="80" stroke="#ffbf6e" stroke-width="1"/><line x1="40" y1="100" x2="160" y2="100" stroke="#ffbf6e" stroke-width="1"/><line x1="40" y1="120" x2="160" y2="120" stroke="#ffbf6e" stroke-width="1"/></svg></div></div><div class="art-ov"><div class="art-label">CRATE</div></div></div>
-      <div class="art-item rev d3"><div class="art-bg a6"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.18"><svg width="65%" height="65%" viewBox="0 0 200 200" fill="none"><circle cx="100" cy="110" r="50" stroke="#6effff" stroke-width="1"/><circle cx="100" cy="110" r="30" stroke="#6effff" stroke-width="1"/><line x1="100" y1="60" x2="100" y2="30" stroke="#6effff" stroke-width="2"/><circle cx="100" cy="26" r="6" stroke="#6effff" stroke-width="1"/></svg></div></div><div class="art-ov"><div class="art-label">GRENADE</div></div></div>
-      <div class="art-item rev"><div class="art-bg a7"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.18"><svg width="65%" height="65%" viewBox="0 0 200 200" fill="none"><path d="M30,100 Q30,40 100,40 Q170,40 170,100" stroke="#d0d0ff" stroke-width="1" fill="none"/><line x1="100" y1="40" x2="100" y2="170" stroke="#d0d0ff" stroke-width="2"/><line x1="30" y1="100" x2="170" y2="100" stroke="#d0d0ff" stroke-width="1"/></svg></div></div><div class="art-ov"><div class="art-label">CROSSBOW</div></div></div>
-      <div class="art-item rev d1" style="grid-column:span 2"><div class="art-bg a8"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.18"><svg width="50%" height="50%" viewBox="0 0 200 200" fill="none"><rect x="20" y="100" width="160" height="60" stroke="#6effbf" stroke-width="1"/><ellipse cx="100" cy="100" rx="60" ry="18" stroke="#6effbf" stroke-width="1"/><circle cx="50" cy="155" r="22" stroke="#6effbf" stroke-width="1"/><circle cx="150" cy="155" r="22" stroke="#6effbf" stroke-width="1"/><rect x="60" y="60" width="80" height="40" stroke="#6effbf" stroke-width="1"/></svg></div></div><div class="art-ov"><div class="art-label">VINTAGE CAR</div></div></div>
+      <div class="art-item rev"><div class="art-bg a1"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.14"><svg width="62%" height="62%" viewBox="0 0 200 200" fill="none"><rect x="40" y="60" width="120" height="80" stroke="cyan" stroke-width="1"/><rect x="70" y="40" width="60" height="20" stroke="cyan" stroke-width="1"/><line x1="100" y1="60" x2="100" y2="10" stroke="cyan" stroke-width="1"/><circle cx="100" cy="8" r="5" fill="cyan" opacity=".5"/></svg></div></div><div class="art-ov"><div class="art-label">SCI-FI MEDKIT</div><div class="art-sub">3D PROP</div></div></div>
+      <div class="art-item rev d1"><div class="art-bg a2"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.14"><svg width="62%" height="62%" viewBox="0 0 200 200" fill="none"><rect x="30" y="90" width="140" height="70" stroke="#ff8e8e" stroke-width="1"/><ellipse cx="100" cy="90" rx="50" ry="18" stroke="#ff8e8e" stroke-width="1"/><circle cx="55" cy="155" r="16" stroke="#ff8e8e" stroke-width="1"/><circle cx="145" cy="155" r="16" stroke="#ff8e8e" stroke-width="1"/></svg></div></div><div class="art-ov"><div class="art-label">VINTAGE MINI TRUCK</div><div class="art-sub">3D VEHICLE</div></div></div>
+      <div class="art-item rev d2"><div class="art-bg a3"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.14"><svg width="62%" height="62%" viewBox="0 0 200 200" fill="none"><rect x="18" y="58" width="60" height="124" stroke="#8eff8e" stroke-width="1"/><rect x="122" y="58" width="60" height="124" stroke="#8eff8e" stroke-width="1"/><rect x="18" y="58" width="164" height="30" stroke="#8eff8e" stroke-width="1"/></svg></div></div><div class="art-ov"><div class="art-label">BARRICADE</div><div class="art-sub">3D PROP</div></div></div>
+      <div class="art-item rev d3"><div class="art-bg a4"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.14"><svg width="62%" height="62%" viewBox="0 0 200 200" fill="none"><rect x="18" y="58" width="164" height="102" stroke="#bf8eff" stroke-width="1"/><line x1="18" y1="58" x2="38" y2="38" stroke="#bf8eff" stroke-width="1"/><line x1="182" y1="58" x2="162" y2="38" stroke="#bf8eff" stroke-width="1"/><line x1="38" y1="38" x2="162" y2="38" stroke="#bf8eff" stroke-width="1"/></svg></div></div><div class="art-ov"><div class="art-label">CONTAINER</div><div class="art-sub">3D PROP</div></div></div>
+      <div class="art-item rev d1"><div class="art-bg a5"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.14"><svg width="62%" height="62%" viewBox="0 0 200 200" fill="none"><rect x="38" y="58" width="124" height="102" stroke="#ffbf6e" stroke-width="1"/><line x1="38" y1="78" x2="162" y2="78" stroke="#ffbf6e" stroke-width="1"/><line x1="38" y1="98" x2="162" y2="98" stroke="#ffbf6e" stroke-width="1"/><line x1="38" y1="118" x2="162" y2="118" stroke="#ffbf6e" stroke-width="1"/></svg></div></div><div class="art-ov"><div class="art-label">CRATE</div><div class="art-sub">3D PROP</div></div></div>
+      <div class="art-item rev d2"><div class="art-bg a6"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.14"><svg width="62%" height="62%" viewBox="0 0 200 200" fill="none"><circle cx="100" cy="112" r="48" stroke="#6effff" stroke-width="1"/><circle cx="100" cy="112" r="28" stroke="#6effff" stroke-width="1"/><line x1="100" y1="64" x2="100" y2="30" stroke="#6effff" stroke-width="2"/><circle cx="100" cy="27" r="6" stroke="#6effff" stroke-width="1"/></svg></div></div><div class="art-ov"><div class="art-label">GRENADE</div><div class="art-sub">3D WEAPON PROP</div></div></div>
+      <div class="art-item rev d3"><div class="art-bg a7"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.14"><svg width="62%" height="62%" viewBox="0 0 200 200" fill="none"><path d="M28,100 Q28,40 100,40 Q172,40 172,100" stroke="#d0d0ff" stroke-width="1" fill="none"/><line x1="100" y1="40" x2="100" y2="172" stroke="#d0d0ff" stroke-width="2"/></svg></div></div><div class="art-ov"><div class="art-label">CROSSBOW</div><div class="art-sub">3D WEAPON</div></div></div>
+      <div class="art-item rev"><div class="art-bg a8"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.14"><svg width="62%" height="62%" viewBox="0 0 200 200" fill="none"><rect x="18" y="100" width="164" height="62" stroke="#6effbf" stroke-width="1"/><ellipse cx="100" cy="100" rx="58" ry="18" stroke="#6effbf" stroke-width="1"/><circle cx="50" cy="156" r="22" stroke="#6effbf" stroke-width="1"/><circle cx="150" cy="156" r="22" stroke="#6effbf" stroke-width="1"/><rect x="62" y="60" width="76" height="40" stroke="#6effbf" stroke-width="1"/></svg></div></div><div class="art-ov"><div class="art-label">VINTAGE CAR</div><div class="art-sub">3D VEHICLE</div></div></div>
     </div>
-    <div style="text-align:center;margin-top:36px" class="rev">
-      <a href="http://sai_bhargav.artstation.com" target="_blank" class="btn btn-g">View on ArtStation →</a>
-      &nbsp;&nbsp;
-      <a href="artworks.html" class="btn btn-g">Full Gallery →</a>
+    <div style="text-align:center;margin-top:32px" class="rev">
+      <a href="http://sai_bhargav.artstation.com" target="_blank" class="btn btn-g btn-sm">View on ArtStation →</a>&nbsp;&nbsp;
+      <a href="pages/artworks.html"               class="btn btn-g btn-sm">Full Gallery →</a>
     </div>
   </div>
 </section>
 
 <div class="divider s"></div>
 
-<!-- ══════════════════════════════════════
-     §7  CONTACT
-══════════════════════════════════════ -->
+<!-- ═══ CONTACT ═══ -->
 <section id="contact" class="s">
   <div class="wrap">
     <div class="rev">
       <div class="sec-label">Let's Play</div>
       <h2 class="sec-title">GET IN TOUCH</h2>
-      <p style="margin-top:14px;color:var(--dim);font-size:1.05rem">Feel free to contact me for future work and partnerships. Let's build something extraordinary together.</p>
+      <p style="margin-top:12px;color:var(--dim);font-size:1.02rem">Feel free to contact me for future work and partnerships. Let's build something extraordinary together.</p>
     </div>
     <div class="cg">
       <div class="rev">
-        <div class="ci-item"><div class="ci-label">Location</div><div class="ci-val">United Kingdom</div></div>
-        <div class="ci-item">
-          <div class="ci-label">Available for</div>
-          <div style="font-size:1rem;color:var(--txt);margin-top:4px">Game Design · Level Design<br>Prototyping · Collaboration</div>
-        </div>
-        <div class="ci-item"><div class="ci-label">Email</div><div class="ci-val" style="font-size:.9rem">saibhargav7599@gmail.com</div></div>
-        <div class="c-links">
-          <a href="https://www.linkedin.com/in/saibhargav7599"  target="_blank" class="c-link">🔗 LinkedIn Profile</a>
-          <a href="http://sai_bhargav.artstation.com"           target="_blank" class="c-link">🎨 ArtStation Portfolio</a>
-          <a href="https://youtu.be/WuV2wXUhXF0"               target="_blank" class="c-link">▶ YouTube Channel</a>
-          <a href="https://saibhargav7599.github.io/operation-blackout/#process" target="_blank" class="c-link">🗺️ Level Design Portfolio</a>
-          <a href="https://saibhargav7599.wixsite.com/gamedesign" target="_blank" class="c-link">🌐 Original Portfolio Site</a>
+        <div class="ci"><div class="ci-l">Location</div><div class="ci-v">United Kingdom</div></div>
+        <div class="ci"><div class="ci-l">Email</div><div class="ci-v" style="font-size:.85rem">saibhargav7599@gmail.com</div></div>
+        <div class="ci"><div class="ci-l">Available for</div><div style="font-size:1rem;color:var(--txt);margin-top:4px">Game Design · Level Design<br>Prototyping · Collaboration</div></div>
+        <div class="cl">
+          <a href="https://www.linkedin.com/in/saibhargav7599"               target="_blank" class="clink">🔗 LinkedIn Profile</a>
+          <a href="http://sai_bhargav.artstation.com"                        target="_blank" class="clink">🎨 ArtStation Portfolio</a>
+          <a href="https://youtu.be/WuV2wXUhXF0"                            target="_blank" class="clink">▶ YouTube Channel</a>
+          <a href="https://saibhargav7599.github.io/operation-blackout/#goal" target="_blank" class="clink">🗺️ Level Design Portfolio</a>
+          <a href="https://saibhargav7599.wixsite.com/gamedesign"            target="_blank" class="clink">🌐 Original Portfolio Site</a>
         </div>
       </div>
+      <!-- right side: featured at / achievements -->
       <div class="rev d2">
-        <form class="c-form" id="cf">
-          <div><label class="fl">Your Name</label><input type="text"  class="fi" placeholder="John Doe" required></div>
-          <div><label class="fl">Email Address</label><input type="email" class="fi" placeholder="hello@email.com" required></div>
-          <div><label class="fl">Subject</label><input type="text" class="fi" placeholder="Project Collaboration"></div>
-          <div><label class="fl">Message</label><textarea class="fta" placeholder="Tell me about your project..."></textarea></div>
-          <button type="submit" class="btn btn-p" style="width:100%;justify-content:center">SEND MESSAGE</button>
-        </form>
+        <div class="sec-label" style="margin-bottom:16px">Featured At</div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="padding:20px;background:var(--card);border:1px solid var(--bdr);transition:border-color .3s" onmouseover="this.style.borderColor='var(--c)'" onmouseout="this.style.borderColor='var(--bdr)'">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:#fff;margin-bottom:4px">EXPO TEES — TEESSIDE UNIVERSITY</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--c);margin-bottom:8px">May 2024</div>
+            <div style="font-size:.9rem;color:var(--dim)">Featured capstone projects at Teesside University showcase.</div>
+          </div>
+          <div style="padding:20px;background:var(--card);border:1px solid var(--bdr);transition:border-color .3s" onmouseover="this.style.borderColor='var(--c)'" onmouseout="this.style.borderColor='var(--bdr)'">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:#fff;margin-bottom:4px">NASSCOM / IGDC</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--c);margin-bottom:8px">December 2019</div>
+            <div style="font-size:.9rem;color:var(--dim)">Showcased the visual novel game "PERSONA" at IGDC Nasscom.</div>
+          </div>
+          <div style="margin-top:12px;padding:18px;background:rgba(0,245,255,.04);border:1px solid var(--bdr2)">
+            <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--c);letter-spacing:2px;margin-bottom:8px">KEY ACHIEVEMENT</div>
+            <div style="font-size:.95rem;color:var(--txt)">Contributed to two titles surpassing <strong style="color:var(--c)">50,000+ downloads</strong> on Google Play Store, driving significant revenue growth.</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -893,247 +538,76 @@ footer{padding:36px 56px;border-top:1px solid var(--bdr);
   <div class="f-copy">GAME DESIGNER</div>
 </footer>
 
-<!-- ══════════════════════════════════════
-     GAME MODAL
-══════════════════════════════════════ -->
-<div class="modal-ov" id="modal-ov" onclick="handleMOv(event)">
-  <div class="modal-box" id="modal-box">
-    <div class="modal-hero" id="m-hero">
-      <div class="modal-hero-ov"></div>
-      <button class="modal-x" onclick="closeM()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="modal-tag"  id="m-tag"></div>
-      <h2  class="modal-title" id="m-title"></h2>
-      <div class="modal-role"  id="m-role"></div>
-      <div class="modal-specs" id="m-specs"></div>
-      <p   class="modal-desc"  id="m-desc"></p>
-      <div id="m-mechs"></div>
-      <div class="modal-links" id="m-links"></div>
+<!-- ═══ MODAL ═══ -->
+<div class="modal-ov" id="mov" onclick="if(event.target===this)closeM()">
+  <div class="modal-box">
+    <div class="modal-hero" id="mhero"><div class="mhov"></div><button class="mx" onclick="closeM()">✕</button></div>
+    <div class="mb">
+      <div class="mtag" id="mtag"></div>
+      <h2 class="mt"  id="mt"></h2>
+      <div class="mr"  id="mr"></div>
+      <div class="mspecs" id="msp"></div>
+      <p class="mdesc"  id="mdesc"></p>
+      <div id="mmechs"></div>
+      <div class="mlinks" id="mlnks"></div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     SCRIPTS
-══════════════════════════════════════ -->
+<script src="assets/shared.js"></script>
 <script>
-/* ─ CURSOR ─ */
-const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function aR(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(aR);})();
-document.querySelectorAll('a,button,.gc,.cert-card,.art-item').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cur.classList.add('on');ring.classList.add('on');});
-  el.addEventListener('mouseleave',()=>{cur.classList.remove('on');ring.classList.remove('on');});
-});
-
-/* ─ CANVAS BG ─ */
-(function(){
-  const c=document.getElementById('bgc'),ctx=c.getContext('2d');
-  let W,H,sc=0;
-  function rs(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
-  rs();window.addEventListener('resize',rs);
-  window.addEventListener('scroll',()=>sc=window.scrollY);
-  const P=Array.from({length:90},()=>({x:Math.random()*2200,y:Math.random()*4000,z:Math.random()*820,sz:Math.random()*1.4+.28,sp:Math.random()*.34+.1,op:Math.random()*.5+.1}));
-  const PX=900;
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    const hz=H*.44+sc*.07;
-    ctx.lineWidth=1;
-    for(let i=0;i<22;i++){const t=i/22,y=hz+Math.pow(t,2.3)*H*2.3;if(y>H+60)continue;const s=PX/(PX+i*54);ctx.strokeStyle=`rgba(0,245,255,${t*.042})`;ctx.beginPath();ctx.moveTo(W/2-W*2*s,y);ctx.lineTo(W/2+W*2*s,y);ctx.stroke();}
-    for(let i=-12;i<=12;i++){ctx.strokeStyle='rgba(0,245,255,.028)';ctx.beginPath();ctx.moveTo(W/2+i*112,hz);ctx.lineTo(W/2+i*1700,H+320);ctx.stroke();}
-    P.forEach(p=>{const sx=(p.x-W/2)/(p.z/PX+1)+W/2,sy=(p.y-sc*.24)%(H+130)-66,s=p.sz*(PX/(PX+p.z));ctx.beginPath();ctx.arc(sx,sy,Math.max(s,.28),0,Math.PI*2);ctx.fillStyle=`rgba(0,245,255,${p.op*s})`;ctx.fill();p.y-=p.sp;if(p.y<-66)p.y=H+166;});
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-/* ─ PAGE TRANSITION ─ */
-window.addEventListener('load',()=>{
-  setTimeout(()=>{document.getElementById('pt').classList.add('gone');},60);
-});
-
-/* ─ NAV HAMBURGER ─ */
-document.getElementById('ham').addEventListener('click',()=>document.getElementById('mobnav').classList.toggle('open'));
-function closeMob(){document.getElementById('mobnav').classList.remove('open');}
-document.querySelectorAll('#mobnav a').forEach(a=>a.addEventListener('click',closeMob));
-
-/* ─ SMOOTH SCROLL FOR HASH LINKS ─ */
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    e.preventDefault();
-    const t=document.querySelector(a.getAttribute('href'));
-    if(t)t.scrollIntoView({behavior:'smooth'});
-    closeMob();
-  });
-});
-
-/* ─ NAV ACTIVE ─ */
-const secs=['home','about','portfolio','cinematics','certifications','art','contact'];
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('act'));
-      const l=document.querySelector(`.nav-links a[data-s="${e.target.id}"]`);
-      if(l)l.classList.add('act');
-    }
-  });
-},{threshold:.4});
-secs.forEach(id=>{const el=document.getElementById(id);if(el)obs.observe(el);});
-
-/* ─ REVEAL ─ */
-const revObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
-},{threshold:.08});
-document.querySelectorAll('.rev,.rev-l,.rev-r').forEach(el=>revObs.observe(el));
-
-/* ─ 3D TILT EXP CARD ─ */
-const expc=document.getElementById('expc'),expi=document.getElementById('expi');
-if(expc&&expi){
-  expc.addEventListener('mousemove',e=>{const r=expc.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;expi.style.transform=`rotateY(${x*13}deg) rotateX(${-y*13}deg)`;});
-  expc.addEventListener('mouseleave',()=>{expi.style.transform='';});
-}
-
-/* ─ GAME CARD TILT ─ */
-document.querySelectorAll('.gc').forEach(gc=>{
-  gc.addEventListener('mousemove',e=>{const r=gc.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;gc.style.transform=`translateY(-7px) scale(1.01) rotateY(${x*5}deg) rotateX(${-y*5}deg)`;});
-  gc.addEventListener('mouseleave',()=>{gc.style.transform='';});
-});
-
-/* ─ CONTACT FORM ─ */
-document.getElementById('cf').addEventListener('submit',e=>{
-  e.preventDefault();
-  const btn=e.target.querySelector('button');
-  btn.textContent='MESSAGE SENT ✓';btn.style.background='var(--c3)';
-  setTimeout(()=>{btn.textContent='SEND MESSAGE';btn.style.background='';e.target.reset();},3400);
-});
-
-/* ─ MODAL DATA ─ */
+/* 3D tilt exp card */
+const ec=document.getElementById('expc'),ei=document.getElementById('expi');
+if(ec&&ei){ec.addEventListener('mousemove',e=>{const r=ec.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;ei.style.transform=`rotateY(${x*13}deg) rotateX(${-y*13}deg)`;});ec.addEventListener('mouseleave',()=>{ei.style.transform='';});}
+/* Game card tilt */
+document.querySelectorAll('.gc').forEach(g=>{g.addEventListener('mousemove',e=>{const r=g.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;g.style.transform=`translateY(-7px) scale(1.01) rotateY(${x*5}deg) rotateX(${-y*5}deg)`;});g.addEventListener('mouseleave',()=>{g.style.transform='';});});
+/* Nav active on scroll */
+const ss=['home','about','portfolio','cinematics','certifications','art','contact'];
+const nobs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){document.querySelectorAll('.nav-links a[data-s]').forEach(a=>a.classList.remove('act'));const l=document.querySelector(`.nav-links a[data-s="${x.target.id}"]`);if(l)l.classList.add('act');}});},{threshold:.4});
+ss.forEach(id=>{const el=document.getElementById(id);if(el)nobs.observe(el);});
+/* Modal data */
 const GD={
-  hotel:{
-    tag:'Management Simulation',title:"HOTEL LUXE INN: MANAGER'S CHALLENGE",
-    role:'// Master\'s Project — Lead Designer',
-    year:'2024',platform:'PC',engine:'Unity 3D',bg:'th-hotel',
-    desc:'A serious game that puts you in the shoes of a busy hotel manager. Through a series of timed tasks, you\'ll experience the various aspects of running a successful hotel — from managing reservations and room service to ensuring a smooth flow in the kitchen and dining area. Designed to be both fun and educational, developing valuable real-world hospitality management skills.',
-    mechs:[
-      {i:'⏱️',n:'TIME MANAGEMENT',d:'Prioritize and juggle multiple hotel tasks simultaneously with tight real-time deadlines.'},
-      {i:'🏨',n:'MULTI-DEPARTMENT SIMULATION',d:'Manage reservations, room service, kitchen operations, and dining — all interconnected systems.'},
-      {i:'📊',n:'EDUCATIONAL FEEDBACK',d:'Real-time performance scoring teaches the principles of efficient hotel management.'}
-    ],
-    links:[
-      {label:'▶ Gameplay Video',href:'https://youtu.be/xCHTsjbmJTY'},
-      {label:'⬇ Download Build',href:'https://drive.google.com/file/d/1gxt_WkotQk0s4rO7OJoQ0ZQs16-QeoB2/view?usp=drive_link'},
-      {label:'📄 View PDF',href:'https://drive.google.com/file/d/1cCnpSW-y58CAdkyc66Zq5skm8AUJRFPB/view?usp=sharing'}
-    ]
-  },
-  evil:{
-    tag:'FPS Fantasy Adventure',title:'EVIL LEGACY',
-    role:'// Course Project: Rational Design',
-    year:'2023',platform:'PC',engine:'Unreal Engine',bg:'th-evil',
-    desc:'A fantasy action-adventure FPS with elements of magic, combat, and exploration. During ancient times, wizard Zephyrus used dark magic to corrupt forest creatures. As a young wizard, battle these corrupted beings using four unique magical spells to end Zephyrus\' evil legacy.',
-    mechs:[
-      {i:'⚡',n:'DIFFINDO (LIGHTNING)',d:'Causes lightning bolts to strike enemies, dealing constant damage over time.'},
-      {i:'🛡️',n:'PROTEGO (DEFENSE)',d:'Creates a temporary shield around the player, blocking enemy attacks with limited duration.'},
-      {i:'❄️',n:'IMPEDIMENTA (FREEZE)',d:'Freezes enemies while dealing damage, making them easier to defeat or allowing escape.'},
-      {i:'🔥',n:'AVADA KEDAVRA (FIREBALL)',d:'Unleashes a powerful fireball dealing heavy damage — the most devastating spell.'}
-    ],
-    links:[
-      {label:'▶ Gameplay Video',href:'https://youtu.be/Bc49S2FR3qk'},
-      {label:'⬇ Download Build',href:'https://drive.google.com/file/d/1mZhXWIEAcjxdo7sylQUF38PTih2l43ry/view?usp=sharing'},
-      {label:'📄 View PDF',href:'https://drive.google.com/file/d/1_dgZ5gs1giCE4TAaE5sad564O77vFCdE/view?usp=sharing'}
-    ]
-  },
-  escape:{
-    tag:'Stealth Adventure',title:'ESCAPE HUNT',
-    role:'// Course Project: Group Project Solo',
-    year:'2023',platform:'PC',engine:'Unity 3D',bg:'th-escape',
-    desc:'In Escape Hunt, players take on the role of a clever and resourceful Box trapped in an ominous warehouse filled with guards and obstacles. Navigate vents, observe guard patterns, solve puzzles and escape using stealth, wit, and cunning in this heart-pounding adventure.',
-    mechs:[
-      {i:'👁️',n:'GUARD PATTERN OBSERVATION',d:'Study and memorize enemy patrol routes to find safe windows for movement.'},
-      {i:'🔍',n:'CLUE DISCOVERY',d:'Uncover hidden clues throughout the warehouse that progressively unlock the escape path.'},
-      {i:'🎭',n:'STEALTH NAVIGATION',d:'Use vents, crates, and cover to stay out of sight and move through levels undetected.'}
-    ],
-    links:[
-      {label:'▶ Gameplay Video',href:'https://youtu.be/lqwcb-ts59o4'},
-      {label:'⬇ Download Build',href:'https://drive.google.com/file/d/1FJ2zDueHOUzt0yvAL3HygzUFwdICHxpe/view?usp=sharing'},
-      {label:'📄 View PDF',href:'https://drive.google.com/file/d/1aFjG5gJZ_TiuN1Neq0DVqTeJdY-ZgVEf/view?usp=sharing'}
-    ]
-  },
-  dystopian:{
-    tag:'Action Third-Person Shooter',title:'DYSTOPIAN',
-    role:'// Course Project: Game Mechanics',
-    year:'2022',platform:'PC',engine:'Unreal Engine',bg:'th-dystopian',
-    desc:'Set in Exeter Cyber City 2055, DYSTOPIAN puts you in the boots of Suhan — a military scientist defending his city against invading Iroria7X robots using a secret superpower suit. Featuring four innovative mechanics that push traditional shooter conventions.',
-    mechs:[
-      {i:'🐌',n:"SNAIL'S PACE (BULLET TIME)",d:'Time slows when aiming at an enemy — inspired by Max Payne\'s Bullet Time. Skill-based precision.'},
-      {i:'🪃',n:'FLING (OBJECT LAUNCH)',d:'Pick up highlighted environment objects and launch them at enemies — inspired by Control\'s Launch ability.'},
-      {i:'⬆️',n:'DUAL JUMP + FALL BLAST',d:'Double jump + blast radius on landing near enemies, sending them flying with particle effects.'},
-      {i:'🔫',n:'LASER RIFLE',d:'30-round precision weapon — effective at long and medium range with steady fire rate.'}
-    ],
-    links:[
-      {label:'▶ Gameplay Video',href:'https://youtu.be/FyTiHAGFq24'},
-      {label:'⬇ Download Build',href:'https://drive.google.com/file/d/1RZvYpeBlXySbbnQ0K2I9rpiBKdAV6Mf_/view?usp=sharing'},
-      {label:'📄 View PDF',href:'https://drive.google.com/file/d/1iH0n7Onz4sUQsB3bm7xy0FhqJpN5Pwxs/view?usp=sharing'}
-    ]
-  },
-  hollyhill:{
-    tag:'Mission Design',title:'HOLLYHILL PENINSULA ISLAND',
-    role:'// Course Project: Mission Design',
-    year:'2023',platform:'PC',engine:'Unreal Engine',bg:'th-hollyhill',
-    desc:'An open-world mission design project set on a uniquely crafted peninsula island. Explores narrative-driven gameplay through carefully constructed quests, environmental storytelling, and world-building. Demonstrates proficiency in mission flow design, pacing, and spatial communication.',
-    mechs:[
-      {i:'🗺️',n:'MISSION FLOW DESIGN',d:'Intricately designed quest chains that escalate in complexity and emotional resonance.'},
-      {i:'🌍',n:'ENVIRONMENTAL STORYTELLING',d:'The island communicates history, culture, and danger through thoughtful level layout.'},
-      {i:'⚖️',n:'PACING & DIFFICULTY CURVE',d:'Carefully balanced challenge escalation keeping players engaged from start to finish.'}
-    ],
-    links:[
-      {label:'▶ Gameplay Video',href:'https://youtu.be/CTgqu1qcPm8'},
-      {label:'⬇ Download Build',href:'https://drive.google.com/file/d/19kRduzNoeP3HkQ5Go0-bJIzyJyW86dBL/view?usp=sharing'}
-    ]
-  },
-  persona:{
-    tag:'Visual Novel',title:'PERSONA',
-    role:'// Lead Designer',
-    year:'2019',platform:'PC',engine:"Ren'Py / Unity",bg:'th-persona',
-    desc:"A dark psychological detective visual novel. A young woman walks into the station confessing to triple homicide — but no bodies are found. As the Detective, navigate a twisting investigation. Is she deranged or a cunning criminal? Your intelligence determines your outcome. Your Fear is your killer.",
-    mechs:[
-      {i:'🔎',n:'INVESTIGATION CHOICES',d:'Player decisions during interrogation and evidence-gathering shape the narrative path and ending.'},
-      {i:'🧠',n:'PSYCHOLOGICAL PROFILING',d:'Analyze the suspect\'s behavior, contradictions, and emotional cues to build a case.'},
-      {i:'😨',n:'FEAR MECHANIC',d:"A unique mechanic where the player's in-game fear state affects available dialogue options and branches."}
-    ],
-    links:[
-      {label:'▶ Gameplay Video',href:'https://youtu.be/4iclQtB6GZg'},
-      {label:'⬇ Download Build',href:'https://drive.google.com/file/d/1B21E-yNMJtBQ2Qxxz-hWE811SlbaYS1s/view?usp=sharing'},
-      {label:'📊 View Presentation',href:'https://docs.google.com/presentation/d/1FkqoJvK-2WcipXxYPn1XWfpDjjqsPriM/edit?usp=sharing'}
-    ]
-  }
+  hotel:{tag:'Management Simulation',title:"HOTEL LUXE INN: MANAGER'S CHALLENGE",role:"// Master's Project — Lead Designer",year:'2024',platform:'PC',engine:'Unity 3D',bg:'th-hotel',
+    desc:"A serious game putting you in the shoes of a busy hotel manager. Through timed tasks across reservations, room service, kitchen management and dining — all about efficient time management and real hospitality skills. Master's thesis: An approach to develop a serious game in hospitality addressing the challenges faced by a hotel manager.",
+    mechs:[{i:'⏱️',n:'TIME MANAGEMENT',d:'Prioritize and juggle multiple hotel tasks simultaneously with real-time deadlines.'},{i:'🏨',n:'MULTI-DEPARTMENT SIMULATION',d:'Manage reservations, room service, kitchen operations, and dining as interconnected systems.'},{i:'📊',n:'EDUCATIONAL FEEDBACK',d:'Real-time performance scoring teaches efficient hotel management principles.'}],
+    links:[{l:'▶ Gameplay Video',h:'https://youtu.be/xCHTsjbmJTY'},{l:'⬇ Download Build',h:'https://drive.google.com/file/d/1gxt_WkotQk0s4rO7OJoQ0ZQs16-QeoB2/view?usp=drive_link'},{l:'📄 PDF Document',h:'https://drive.google.com/file/d/1cCnpSW-y58CAdkyc66Zq5skm8AUJRFPB/view?usp=sharing'},{l:'📖 Full Case Study',h:'pages/projects.html'}]},
+  evil:{tag:'FPS Fantasy Adventure',title:'EVIL LEGACY',role:'// Course Project: Rational Design',year:'2023',platform:'PC',engine:'Unreal Engine',bg:'th-evil',
+    desc:"A fantasy action-adventure FPS with magic, combat, and exploration through a mystical forest. Play as a young wizard battling corrupted creatures left behind by the dark wizard Zephyrus, using four unique spells.",
+    mechs:[{i:'⚡',n:'DIFFINDO (LIGHTNING)',d:'Causes lightning bolts to strike enemies, dealing constant damage over time.'},{i:'🛡️',n:'PROTEGO (DEFENSE)',d:'Creates a temporary shield blocking enemy attacks with limited duration.'},{i:'❄️',n:'IMPEDIMENTA (FREEZE)',d:'Freezes enemies while dealing damage, making them easier to defeat.'},{i:'🔥',n:'AVADA KEDAVRA (FIREBALL)',d:'Unleashes a powerful fireball dealing heavy damage — the most devastating spell.'}],
+    links:[{l:'▶ Gameplay Video',h:'https://youtu.be/Bc49S2FR3qk'},{l:'⬇ Download Build',h:'https://drive.google.com/file/d/1mZhXWIEAcjxdo7sylQUF38PTih2l43ry/view?usp=sharing'},{l:'📄 PDF Document',h:'https://drive.google.com/file/d/1_dgZ5gs1giCE4TAaE5sad564O77vFCdE/view?usp=sharing'},{l:'📖 Full Case Study',h:'pages/projects.html'}]},
+  escape:{tag:'Stealth Adventure',title:'ESCAPE HUNT',role:'// Course Project: Group Project Solo',year:'2023',platform:'PC',engine:'Unity 3D',bg:'th-escape',
+    desc:"Play as a Box trapped in a guarded warehouse. Navigate vents, observe guard patterns, solve puzzles and escape using stealth, wit, and cunning. Observe guard patterns and use agility to navigate vents and crates.",
+    mechs:[{i:'👁️',n:'GUARD PATTERN OBSERVATION',d:'Study and memorize enemy patrol routes to find safe windows for movement.'},{i:'🔍',n:'CLUE DISCOVERY',d:'Uncover hidden clues that progressively unlock the escape path.'},{i:'🎭',n:'STEALTH NAVIGATION',d:'Use vents, crates, and cover to stay undetected and navigate through levels.'}],
+    links:[{l:'▶ Gameplay Video',h:'https://youtu.be/lqwcb-ts59o4'},{l:'⬇ Download Build',h:'https://drive.google.com/file/d/1FJ2zDueHOUzt0yvAL3HygzUFwdICHxpe/view?usp=sharing'},{l:'📄 PDF Document',h:'https://drive.google.com/file/d/1aFjG5gJZ_TiuN1Neq0DVqTeJdY-ZgVEf/view?usp=sharing'},{l:'📖 Full Case Study',h:'pages/projects.html'}]},
+  dystopian:{tag:'Action Third-Person Shooter',title:'DYSTOPIAN',role:'// Course Project: Game Mechanics',year:'2022',platform:'PC',engine:'Unreal Engine',bg:'th-dystopian',
+    desc:"Set in Exeter Cyber City 2055, DYSTOPIAN puts you in the boots of Suhan — a military scientist defending his city against Iroria7X robots using a secret superpower suit. Four innovative mechanics push traditional shooter conventions.",
+    mechs:[{i:'🐌',n:"SNAIL'S PACE (BULLET TIME)",d:"Time slows when aiming at an enemy — inspired by Max Payne's Bullet Time."},{i:'🪃',n:'FLING (OBJECT LAUNCH)',d:"Pick up highlighted environment objects and launch them at enemies — inspired by Control's Launch."},{i:'⬆️',n:'DUAL JUMP + FALL BLAST',d:'Double jump + blast radius on landing near enemies, sending them flying.'},{i:'🔫',n:'LASER RIFLE',d:'30-round precision weapon effective at long and medium range.'}],
+    links:[{l:'▶ Gameplay Video',h:'https://youtu.be/FyTiHAGFq24'},{l:'⬇ Download Build',h:'https://drive.google.com/file/d/1RZvYpeBlXySbbnQ0K2I9rpiBKdAV6Mf_/view?usp=sharing'},{l:'📄 PDF Document',h:'https://drive.google.com/file/d/1iH0n7Onz4sUQsB3bm7xy0FhqJpN5Pwxs/view?usp=sharing'},{l:'📖 Full Case Study',h:'pages/projects.html'}]},
+  hollyhill:{tag:'Mission Design',title:'HOLLYHILL PENINSULA ISLAND',role:'// Course Project: Mission Design',year:'2023',platform:'PC',engine:'Unreal Engine',bg:'th-hollyhill',
+    desc:"An open-world mission design project on a uniquely crafted peninsula island. Explores narrative-driven gameplay through carefully constructed quests, environmental storytelling, and world-building.",
+    mechs:[{i:'🗺️',n:'MISSION FLOW DESIGN',d:'Quest chains that escalate in complexity and emotional resonance.'},{i:'🌍',n:'ENVIRONMENTAL STORYTELLING',d:'The island communicates history and danger through thoughtful layout.'},{i:'⚖️',n:'PACING & DIFFICULTY CURVE',d:'Carefully balanced challenge escalation from start to finish.'}],
+    links:[{l:'▶ Gameplay Video',h:'https://youtu.be/CTgqu1qcPm8'},{l:'⬇ Download Build',h:'https://drive.google.com/file/d/19kRduzNoeP3HkQ5Go0-bJIzyJyW86dBL/view?usp=sharing'},{l:'📖 Full Case Study',h:'pages/projects.html'}]},
+  persona:{tag:'Visual Novel',title:'PERSONA',role:'// Lead Designer',year:'2019',platform:'PC',engine:"Ren'Py / Unity",bg:'th-persona',
+    desc:"A dark psychological detective visual novel. A woman confesses to triple homicide — no bodies found. Navigate a twisting investigation: is she deranged or a cunning criminal? Your intelligence determines your outcome. Your Fear is your killer.",
+    mechs:[{i:'🔎',n:'INVESTIGATION CHOICES',d:'Player decisions during interrogation shape the narrative path and ending.'},{i:'🧠',n:'PSYCHOLOGICAL PROFILING',d:"Analyze the suspect's behavior and emotional cues to build a case."},{i:'😨',n:'FEAR MECHANIC',d:"The player's in-game fear state affects available dialogue options and story branches."}],
+    links:[{l:'▶ Gameplay Video',h:'https://youtu.be/4iclQtB6GZg'},{l:'⬇ Download Build',h:'https://drive.google.com/file/d/1B21E-yNMJtBQ2Qxxz-hWE811SlbaYS1s/view?usp=sharing'},{l:'📊 Presentation',h:'https://docs.google.com/presentation/d/1FkqoJvK-2WcipXxYPn1XWfpDjjqsPriM/edit?usp=sharing'},{l:'📖 Full Case Study',h:'pages/projects.html'}]}
 };
-
 function openM(k){
   const d=GD[k];if(!d)return;
-  const hero=document.getElementById('m-hero');
-  hero.className='modal-hero '+d.bg;
-  hero.innerHTML=`<div class="modal-hero-ov"></div><button class="modal-x" onclick="closeM()">✕</button>`;
-  document.getElementById('m-tag').textContent=d.tag;
-  document.getElementById('m-title').textContent=d.title;
-  document.getElementById('m-role').textContent=d.role;
-  document.getElementById('m-desc').textContent=d.desc;
-  document.getElementById('m-specs').innerHTML=`
-    <div class="mspec"><div class="mspec-k">Year</div><div class="mspec-v">${d.year}</div></div>
-    <div class="mspec"><div class="mspec-k">Platform</div><div class="mspec-v">${d.platform}</div></div>
-    <div class="mspec"><div class="mspec-k">Engine</div><div class="mspec-v">${d.engine}</div></div>`;
-  document.getElementById('m-mechs').innerHTML=d.mechs?
-    `<div class="modal-mh">GAME MECHANICS</div><div class="mech-list">${d.mechs.map(m=>`<div class="mech"><div class="mech-i">${m.i}</div><div><div class="mech-n">${m.n}</div><div class="mech-d">${m.d}</div></div></div>`).join('')}</div>`:'';
-  document.getElementById('m-links').innerHTML=d.links?
-    d.links.map(l=>`<a href="${l.href}" target="_blank" class="btn btn-g btn-sm">${l.label}</a>`).join(''):'';
-  document.getElementById('modal-ov').classList.add('open');
-  document.body.classList.add('locked');
+  const h=document.getElementById('mhero');
+  h.className='modal-hero '+d.bg;
+  h.innerHTML=`<div class="mhov"></div><button class="mx" onclick="closeM()">✕</button>`;
+  document.getElementById('mtag').textContent=d.tag;
+  document.getElementById('mt').textContent=d.title;
+  document.getElementById('mr').textContent=d.role;
+  document.getElementById('mdesc').textContent=d.desc;
+  document.getElementById('msp').innerHTML=`<div class="ms"><div class="msk">Year</div><div class="msv">${d.year}</div></div><div class="ms"><div class="msk">Platform</div><div class="msv">${d.platform}</div></div><div class="ms"><div class="msk">Engine</div><div class="msv">${d.engine}</div></div>`;
+  document.getElementById('mmechs').innerHTML=d.mechs?`<div class="mmh">MECHANICS</div><div class="ml">${d.mechs.map(m=>`<div class="mech"><div class="mech-i">${m.i}</div><div><div class="mech-n">${m.n}</div><div class="mech-d">${m.d}</div></div></div>`).join('')}</div>`:'';
+  document.getElementById('mlnks').innerHTML=d.links.map(l=>`<a href="${l.h}" ${l.h.startsWith('http')||l.h.startsWith('https')?'target="_blank"':''} class="btn btn-g btn-sm">${l.l}</a>`).join('');
+  document.getElementById('mov').classList.add('open');document.body.classList.add('locked');
 }
-function closeM(){document.getElementById('modal-ov').classList.remove('open');document.body.classList.remove('locked');}
-function handleMOv(e){if(e.target===document.getElementById('modal-ov'))closeM();}
+function closeM(){document.getElementById('mov').classList.remove('open');document.body.classList.remove('locked');}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM();});
 </script>
-
 </body>
 </html>
